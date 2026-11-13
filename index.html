@@ -1,0 +1,2667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nami's Grand Line Logbook &amp; Wanted Poster — One Piece Episode &amp; Catch-Up Tracker</title>
+  <!-- Tailwind CSS for responsive layout utilities -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Bangers, Cinzel Decorative, Crimson Pro, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Cinzel+Decorative:wght@700;900&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       1. NAMI'S GRAND LINE LOGBOOK — SEA-CHART PARCHMENT & DOUBLE-INK TOKENS
+       ========================================================================== */
+    :root {
+      --parchment-light: #f4e8d1;
+      --parchment-mid: #edd9b4;
+      --parchment-dark: #e6d2ad;
+      --panel-bg: #fbf4e4;
+      --panel-alt: #f3e4c3;
+      --ink: #1e1610;
+      --ink-muted: #5c432d;
+      --crimson: #b22222;
+      --crimson-dark: #881616;
+      --gold: #e0a526;
+      --gold-light: #f7d57c;
+      --navy: #1b4f72;
+      --emerald: #1f6b43;
+      --amber: #b45309;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--parchment-dark);
+    }
+
+    /* Full-Bleed Aged Sea-Chart Parchment Backdrop */
+    body {
+      font-family: "Crimson Pro", Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background-color: var(--parchment-mid);
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(255, 251, 240, 0.55) 0%, transparent 45%),
+        radial-gradient(circle at 85% 90%, rgba(182, 138, 72, 0.28) 0%, transparent 50%),
+        linear-gradient(to right, rgba(30, 22, 16, 0.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 22, 16, 0.045) 1px, transparent 1px),
+        linear-gradient(180deg, var(--parchment-light) 0%, var(--parchment-mid) 52%, var(--parchment-dark) 100%);
+      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px, 100% 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Subtle SVG Paper-Grain Texture Overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.22;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='parchmentNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23parchmentNoise)' opacity='0.45'/%3E%3C/svg%3E");
+    }
+
+    /* Typography Utility Classes */
+    .font-manga {
+      font-family: "Bangers", Impact, sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    .font-nautical {
+      font-family: "Cinzel Decorative", Georgia, serif;
+      letter-spacing: 0.02em;
+    }
+
+    .font-mono-code {
+      font-family: "JetBrains Mono", "Courier New", monospace;
+    }
+
+    /* Crisp Double-Ink Manga Panel Borders */
+    .manga-panel {
+      background-color: var(--panel-bg);
+      border: 3px solid var(--ink);
+      border-radius: 6px;
+      box-shadow: 4px 4px 0 var(--ink);
+      outline: 1px solid rgba(30, 22, 16, 0.24);
+      outline-offset: -5px;
+      position: relative;
+    }
+
+    /* Ben-Day Halftone Manga Header Banner */
+    .halftone-banner {
+      background-color: var(--crimson);
+      background-image: radial-gradient(rgba(30, 22, 16, 0.28) 1.3px, transparent 1.3px);
+      background-size: 6px 6px;
+      border: 3px solid var(--ink);
+      border-radius: 6px;
+      box-shadow: 4px 4px 0 var(--ink);
+      color: #fffaf0;
+    }
+
+    /* Classic Marine Wanted Poster Card */
+    .wanted-poster {
+      background-color: #efe0be;
+      background-image:
+        radial-gradient(ellipse at center, rgba(255, 250, 238, 0.72) 0%, rgba(204, 168, 108, 0.55) 100%),
+        repeating-linear-gradient(0deg, rgba(30, 22, 16, 0.025) 0px, rgba(30, 22, 16, 0.025) 2px, transparent 2px, transparent 4px);
+      border: 3px solid var(--ink);
+      border-radius: 6px;
+      box-shadow: 4px 4px 0 var(--ink);
+      outline: 1px solid rgba(30, 22, 16, 0.28);
+      outline-offset: -5px;
+    }
+
+    /* Classic Crisp Manga Action Buttons */
+    .manga-btn {
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      box-shadow: 2.5px 2.5px 0 var(--ink);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .manga-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3.5px 3.5px 0 var(--ink);
+    }
+
+    .manga-btn:active {
+      transform: translate(1.5px, 1.5px);
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+
+    .btn-parchment {
+      background-color: #f7ebd2;
+      color: var(--ink);
+    }
+    .btn-parchment:hover {
+      background-color: #ebd7b0;
+    }
+
+    .btn-crimson {
+      background-color: var(--crimson);
+      color: #fffaf0;
+    }
+    .btn-crimson:hover {
+      background-color: var(--crimson-dark);
+    }
+
+    .btn-gold {
+      background-color: var(--gold);
+      color: var(--ink);
+    }
+    .btn-gold:hover {
+      background-color: #ebb334;
+    }
+
+    .btn-navy {
+      background-color: var(--navy);
+      color: #fffaf0;
+    }
+    .btn-navy:hover {
+      background-color: #23618b;
+    }
+
+    /* Clean 22x22px Ink-Bordered Square Episode Checkboxes */
+    .ep-checkbox {
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      border: 2.5px solid var(--ink);
+      border-radius: 3px;
+      background-color: #fffdf8;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.12s ease, transform 0.1s ease;
+    }
+
+    .ep-checkbox:hover {
+      background-color: #f4e6c8;
+    }
+
+    .ep-checkbox[aria-checked="true"] {
+      background-color: var(--emerald);
+      color: #fffaf0;
+    }
+
+    /* Log Pose Needle Smooth Rotation */
+    #log-pose-needle {
+      transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: 60px 60px;
+    }
+
+    /* Den Den Mushi Subtle Ringing Animation while syncing */
+    @keyframes snailRing {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-4deg); }
+      50% { transform: rotate(4deg); }
+      75% { transform: rotate(-3deg); }
+    }
+
+    .snail-ringing {
+      animation: snailRing 0.45s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+
+    /* Interactive Sea Chart Island Hover & Pulsing Ring */
+    .voyage-island {
+      cursor: pointer;
+    }
+    .voyage-island:hover .island-landmass {
+      filter: brightness(1.1);
+    }
+
+    @keyframes goldCompassPulse {
+      0%, 100% { opacity: 0.95; stroke-width: 3; }
+      50% { opacity: 0.28; stroke-width: 1.5; }
+    }
+    .active-saga-pulse {
+      animation: goldCompassPulse 1.7s ease-in-out infinite;
+    }
+
+    /* Range Slider Styling */
+    input[type="range"].logbook-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      background: #dec695;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+    }
+    input[type="range"].logbook-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--crimson);
+      border: 2px solid var(--ink);
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#e0a526] selection:text-[#1e1610]">
+
+  <!-- Faint Nautical Compass Rose Watermark in Background -->
+  <div class="fixed top-16 right-6 pointer-events-none opacity-[0.055] z-0 hidden lg:block" aria-hidden="true">
+    <svg viewBox="0 0 320 320" class="w-96 h-96">
+      <circle cx="160" cy="160" r="148" fill="none" stroke="#1e1610" stroke-width="2.5" stroke-dasharray="6 5" />
+      <circle cx="160" cy="160" r="118" fill="none" stroke="#1e1610" stroke-width="1.5" />
+      <polygon points="160,10 180,140 310,160 180,180 160,310 140,180 10,160 140,140" fill="#1e1610" />
+      <circle cx="160" cy="160" r="18" fill="#edd9b4" stroke="#1e1610" stroke-width="3" />
+    </svg>
+  </div>
+
+  <!-- Non-Blocking Toast Notifications (Zero alert/confirm) -->
+  <div id="toast-container" class="fixed bottom-4 right-4 left-4 sm:left-auto sm:w-96 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Main Responsive Page Container -->
+  <div class="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6 space-y-5">
+
+    <!-- ========================================================================
+         1. TITLE BANNER (BEN-DAY HALFTONE MANGA HEADER)
+         ======================================================================== -->
+    <header class="halftone-banner px-4 sm:px-6 py-3.5 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="px-2 py-0.5 bg-[#e0a526] text-[#1e1610] border-2 border-[#1e1610] font-mono-code text-[11px] font-bold uppercase rounded">
+            GRAND LINE EDITION
+          </span>
+          <span class="font-mono-code text-xs text-[#f7d57c] font-semibold">
+            11 Sagas · 51 Story Arcs · Live Jikan &amp; AniList Sync
+          </span>
+        </div>
+        <h1 class="font-manga text-3xl sm:text-4xl md:text-5xl tracking-wider text-[#fffaf0] drop-shadow-[2px_2px_0_#1e1610] mt-1">
+          NAMI'S GRAND LINE LOGBOOK
+        </h1>
+        <p class="text-sm sm:text-base text-[#fcefd7] font-semibold">
+          Complete One Piece Episode &amp; Catch-Up Chart (Ep. 1 – <span id="banner-max-ep">1180</span>+)
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2.5 shrink-0">
+        <button
+          type="button"
+          onclick="openGuideModal()"
+          class="manga-btn btn-gold px-4 py-2 font-mono-code text-xs sm:text-sm font-bold flex items-center gap-2"
+        >
+          <span>📖 Logbook Guide</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ========================================================================
+         2. TOP 3-CARD TELEMETRY STRIP (LOG POSE, WANTED POSTER, DEN DEN MUSHI)
+         ======================================================================== -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch" aria-label="Voyage Telemetry">
+
+      <!-- Card 1 (4 cols): Log Pose Compass Card -->
+      <div class="lg:col-span-4 manga-panel p-4 flex flex-col justify-between gap-3">
+        <div class="flex items-center justify-between border-b-2 border-[#1e1610] pb-2">
+          <h2 class="font-manga text-xl tracking-wider text-[#1e1610]">🧭 LOG POSE COMPASS</h2>
+          <span id="compass-pct-badge" class="px-2 py-0.5 bg-[#1e1610] text-[#f7d57c] font-mono-code text-xs font-bold rounded">
+            0.0%
+          </span>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <!-- Animated SVG Log Pose Compass -->
+          <div class="shrink-0">
+            <svg viewBox="0 0 120 120" class="w-24 h-24 sm:w-28 sm:h-28 drop-shadow-[2px_2px_0_#1e1610]" role="img" aria-label="Log Pose Compass">
+              <!-- Wrist Leather Strap -->
+              <rect x="46" y="4" width="28" height="112" rx="4" fill="#6d4327" stroke="#1e1610" stroke-width="2.5" />
+              <!-- Brass Bezel & Glass Dome -->
+              <circle cx="60" cy="60" r="48" fill="#d49b27" stroke="#1e1610" stroke-width="3" />
+              <circle cx="60" cy="60" r="40" fill="#fffaf0" stroke="#1e1610" stroke-width="2" />
+              <!-- Glass Glare Highlight -->
+              <path d="M32,42 A32,32 0 0,1 80,30" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" opacity="0.8" />
+              <!-- Cardinal Ticks -->
+              <g stroke="#1e1610" stroke-width="2">
+                <line x1="60" y1="21" x2="60" y2="27" />
+                <line x1="60" y1="93" x2="60" y2="99" />
+                <line x1="21" y1="60" x2="27" y2="60" />
+                <line x1="93" y1="60" x2="99" y2="60" />
+              </g>
+              <!-- Center Straw Hat Icon -->
+              <g transform="translate(36, 42) scale(0.48)">
+                <path d="M22,42 C22,16 78,16 78,42 Z" fill="#f3c64f" stroke="#1e1610" stroke-width="4" />
+                <path d="M23,37 Q50,41 77,37 L78,43 Q50,47 22,43 Z" fill="#b22222" stroke="#1e1610" stroke-width="3" />
+                <ellipse cx="50" cy="44" rx="46" ry="10" fill="#f7d06b" stroke="#1e1610" stroke-width="4" />
+              </g>
+              <!-- Rotating Needle -->
+              <g id="log-pose-needle" style="transform: rotate(-135deg);">
+                <polygon points="60,22 66,60 54,60" fill="#b22222" stroke="#1e1610" stroke-width="2" />
+                <polygon points="60,98 66,60 54,60" fill="#1b4f72" stroke="#1e1610" stroke-width="2" />
+                <circle cx="60" cy="60" r="5.5" fill="#e0a526" stroke="#1e1610" stroke-width="2" />
+              </g>
+            </svg>
+          </div>
+
+          <div class="min-w-0 flex-1 space-y-1">
+            <div class="font-mono-code text-[11px] font-bold text-[#1b4f72] uppercase">
+              CURRENT / NEXT EPISODE
+            </div>
+            <div id="compass-ep-readout" class="font-manga text-2xl text-[#1e1610] tracking-wide">
+              EPISODE #1
+            </div>
+            <div id="compass-saga-readout" class="font-bold text-sm text-[#1e1610] truncate">
+              1. East Blue Saga
+            </div>
+            <div id="compass-arc-readout" class="text-xs text-[#5c432d] truncate">
+              Romance Dawn Arc
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-1 pt-1">
+          <div class="flex flex-wrap justify-between gap-1 font-mono-code text-[11px] font-bold text-[#1e1610]">
+            <span id="compass-watched-summary">0 Watched · 1,103 Left</span>
+            <span id="compass-hours-saved" class="text-[#1f6b43]">30.8h Saved</span>
+          </div>
+          <div class="w-full h-3 bg-[#dec695] border-2 border-[#1e1610] rounded-full overflow-hidden">
+            <div id="compass-progress-fill" class="h-full bg-[#b22222] transition-all duration-300" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 (4 cols): Marine Wanted Poster Card -->
+      <div class="lg:col-span-4 wanted-poster p-4 flex flex-col justify-between gap-2 text-center">
+        <div>
+          <div class="font-nautical text-2xl sm:text-3xl font-black tracking-[0.14em] text-[#1e1610] leading-none">
+            WANTED
+          </div>
+          <div class="font-mono-code text-[10px] font-bold tracking-[0.22em] text-[#1e1610] border-b-2 border-[#1e1610] pb-1 mt-0.5">
+            DEAD OR ALIVE
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 text-left bg-[#e6d1a4]/75 border-2 border-[#1e1610] p-2 rounded">
+          <!-- Clickable Crew Emblem Selector -->
+          <button
+            type="button"
+            id="crew-emblem-btn"
+            onclick="cycleCrewEmblem()"
+            title="Click to switch pirate crew emblem"
+            class="shrink-0 w-16 h-16 bg-[#fbf4e4] hover:bg-[#fffaf0] border-2 border-[#1e1610] rounded flex flex-col items-center justify-center p-1 cursor-pointer transition-transform active:scale-95"
+          >
+            <div id="crew-emblem-svg-box" class="w-11 h-11 flex items-center justify-center"></div>
+            <span id="crew-emblem-label" class="font-mono-code text-[8px] font-bold uppercase text-[#5c432d] leading-none mt-0.5">
+              LUFFY
+            </span>
+          </button>
+
+          <div class="min-w-0 flex-1 space-y-0.5">
+            <label for="wanted-pirate-name-input" class="sr-only">Editable Pirate Name</label>
+            <input
+              type="text"
+              id="wanted-pirate-name-input"
+              maxlength="26"
+              value="MONKEY D. LUFFY"
+              oninput="updatePirateName(this.value)"
+              title="Click to customize your pirate name"
+              class="w-full bg-transparent border-b border-dashed border-[#1e1610]/50 focus:border-solid focus:border-[#b22222] focus:outline-none font-nautical text-xs sm:text-sm font-black uppercase text-[#1e1610] tracking-wider"
+            />
+            <div id="wanted-rank-title" class="font-manga text-lg sm:text-xl text-[#b22222] tracking-wide leading-tight">
+              CHORE BOY
+            </div>
+            <div class="font-mono-code text-[11px] font-bold text-[#1e1610] flex flex-wrap gap-x-1.5">
+              <span id="wanted-watched-stat">0 Watched</span>
+              <span>·</span>
+              <span id="wanted-canon-left-stat" class="text-[#1f6b43]">1,103 Catch-Up Left</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t-2 border-[#1e1610] pt-1.5 flex items-baseline justify-between px-1">
+          <span class="font-nautical text-xl font-black text-[#1e1610]">฿</span>
+          <span id="wanted-bounty-amount" class="font-nautical text-xl sm:text-2xl font-black text-[#1e1610] tracking-wider">
+            0
+          </span>
+          <span class="font-mono-code text-[10px] font-bold text-[#5c432d]">BERRY</span>
+        </div>
+      </div>
+
+      <!-- Card 3 (4 cols): Den Den Mushi Broadcast Receiver Card -->
+      <div class="lg:col-span-4 manga-panel p-4 flex flex-col justify-between gap-3">
+        <div class="flex items-center justify-between border-b-2 border-[#1e1610] pb-2">
+          <h2 class="font-manga text-xl tracking-wider text-[#1e1610]">🐌 DEN DEN MUSHI RECEIVER</h2>
+          <button
+            type="button"
+            id="sync-now-btn"
+            onclick="syncLiveData(true)"
+            class="manga-btn btn-crimson px-2.5 py-1 font-mono-code text-xs font-bold"
+          >
+            ↻ Sync Now
+          </button>
+        </div>
+
+        <div class="flex items-center gap-3.5">
+          <!-- Illustrated SVG Den Den Mushi Snail with Headset -->
+          <div id="den-den-snail-wrap" class="snail-ringing shrink-0">
+            <svg viewBox="0 0 104 88" class="w-20 h-16 sm:w-22 sm:h-18" role="img" aria-label="Den Den Mushi Transponder Snail">
+              <!-- Snail Body -->
+              <path d="M12,72 C10,58 22,52 35,54 L72,54 C84,54 92,60 89,72 C87,78 76,80 58,80 L23,80 C14,80 11,76 12,72 Z" fill="#f0c39b" stroke="#1e1610" stroke-width="2.5" />
+              <!-- Blue Spiral Shell -->
+              <circle cx="55" cy="45" r="23" fill="#5e93bd" stroke="#1e1610" stroke-width="2.5" />
+              <path d="M55,45 m-14,0 a14,14 0 1,0 28,0 a9.5,9.5 0 1,0 -19,0 a5,5 0 1,0 10,0" fill="none" stroke="#1e1610" stroke-width="2.3" stroke-linecap="round" />
+              <!-- Transponder Headset & Earcups -->
+              <path d="M38,22 Q55,12 72,22" fill="none" stroke="#1e1610" stroke-width="4" stroke-linecap="round" />
+              <rect x="33" y="19" width="9" height="8" rx="2.5" fill="#b22222" stroke="#1e1610" stroke-width="1.8" />
+              <rect x="68" y="19" width="9" height="8" rx="2.5" fill="#b22222" stroke="#1e1610" stroke-width="1.8" />
+              <!-- Eye Stalks & Eyes -->
+              <line x1="23" y1="55" x2="19" y2="34" stroke="#1e1610" stroke-width="2.6" stroke-linecap="round" />
+              <line x1="33" y1="54" x2="32" y2="33" stroke="#1e1610" stroke-width="2.6" stroke-linecap="round" />
+              <circle cx="19" cy="31" r="6" fill="#fffaf0" stroke="#1e1610" stroke-width="2" />
+              <circle cx="20" cy="31" r="2.3" fill="#1e1610" />
+              <circle cx="32" cy="30" r="6" fill="#fffaf0" stroke="#1e1610" stroke-width="2" />
+              <circle cx="33" cy="30" r="2.3" fill="#1e1610" />
+              <!-- Friendly Smile -->
+              <path d="M17,67 Q25,71 32,66" fill="none" stroke="#1e1610" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <div class="min-w-0 flex-1 space-y-1.5">
+            <span id="snail-status-pill" class="inline-block px-2 py-0.5 bg-[#1b4f72] text-[#fffaf0] border border-[#1e1610] rounded font-mono-code text-[11px] font-bold">
+              PURU PURU... SYNCING
+            </span>
+            <div class="font-mono-code text-[11px] font-bold text-[#5c432d] uppercase">
+              NEXT EPISODE AIRING
+            </div>
+            <div id="snail-countdown-display" class="font-mono-code text-xs sm:text-sm font-bold text-[#1e1610] leading-snug">
+              BETWEEN SEASONS · RETURNS 2027 (NEXT: EP. 1181)
+            </div>
+          </div>
+        </div>
+
+        <div id="snail-subnote" class="font-mono-code text-[11px] text-[#5c432d] border-t border-[#1e1610]/25 pt-1.5 truncate">
+          Jikan v4 + AniList GraphQL · 4.5s timeout protected
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================
+         3. INTERACTIVE GRAND LINE & RED LINE VOYAGE CHART MAP
+         ======================================================================== -->
+    <section class="manga-panel overflow-hidden" aria-label="Grand Line and Red Line Voyage Chart">
+      <div class="px-4 py-2.5 bg-[#f3e4c3] border-b-2 border-[#1e1610] flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center gap-2">
+          <h2 class="font-manga text-xl sm:text-2xl tracking-wider text-[#1e1610]">
+            🗺️ GRAND LINE &amp; RED LINE VOYAGE CHART
+          </h2>
+          <span class="font-mono-code text-xs text-[#5c432d]">
+            Click any island port to sail directly to that Saga
+          </span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span id="map-filter-status" class="font-mono-code text-xs font-bold text-[#1b4f72]">
+            Showing: All 11 Sagas
+          </span>
+          <button
+            type="button"
+            id="show-all-sagas-btn"
+            onclick="selectSagaFromMap('all')"
+            class="manga-btn btn-gold px-3 py-1 font-mono-code text-xs font-bold"
+          >
+            Show All Sagas
+          </button>
+        </div>
+      </div>
+
+      <!-- Responsive Inline SVG Nautical Sea Chart Container (Built via createElementNS) -->
+      <div id="voyage-chart-wrapper" class="w-full overflow-x-auto bg-[#efe1c1]">
+        <svg
+          id="voyage-chart-svg"
+          viewBox="0 0 1160 235"
+          width="100%"
+          height="auto"
+          class="min-w-[880px] block select-none"
+          role="img"
+          aria-label="Interactive Nautical Map from East Blue across Reverse Mountain and the Red Line to Elbaph"
+        ></svg>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         4. CAPTAIN'S NAVIGATION DECK (CHECKPOINT SETTER & VOYAGE PACE CALCULATOR)
+         ======================================================================== -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-4" aria-label="Captain's Navigation Deck">
+
+      <!-- Left (7 cols): Quick-Start Checkpoint Setter + Up Next Callout -->
+      <div class="lg:col-span-7 manga-panel p-4 flex flex-col justify-between gap-3.5">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b-2 border-[#1e1610] pb-2">
+          <h2 class="font-manga text-xl sm:text-2xl tracking-wider text-[#1e1610]">
+            ⚓ QUICK-START CHECKPOINT SETTER
+          </h2>
+          <span class="font-mono-code text-xs font-bold text-[#5c432d]">
+            Marks prior episodes watched
+          </span>
+        </div>
+
+        <form onsubmit="handleCheckpointSubmit(event)" class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+          <div class="flex items-center gap-2 flex-1">
+            <label for="checkpoint-ep-input" class="font-mono-code text-xs font-bold text-[#1e1610] shrink-0">
+              Current Ep #:
+            </label>
+            <input
+              type="number"
+              id="checkpoint-ep-input"
+              min="1"
+              max="1250"
+              placeholder="e.g. 399"
+              class="w-full sm:w-32 px-3 py-1.5 bg-[#fffdf8] border-2 border-[#1e1610] rounded font-mono-code text-sm font-bold text-[#1e1610] focus:outline-none focus:ring-2 focus:ring-[#e0a526]"
+            />
+            <button type="submit" class="manga-btn btn-crimson px-4 py-1.5 font-mono-code text-xs font-bold shrink-0">
+              Set Checkpoint
+            </button>
+          </div>
+        </form>
+
+        <!-- One-Click Arc Checkpoint Presets -->
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="font-mono-code text-[11px] font-bold text-[#5c432d] mr-1">Saga Presets:</span>
+          <button type="button" onclick="jumpToEpisodeCheckpoint(1)" class="manga-btn btn-parchment px-2.5 py-1 font-mono-code text-[11px] font-bold">Start: Ep. 1</button>
+          <button type="button" onclick="jumpToEpisodeCheckpoint(229)" class="manga-btn btn-parchment px-2.5 py-1 font-mono-code text-[11px] font-bold">Water 7: 229</button>
+          <button type="button" onclick="jumpToEpisodeCheckpoint(399)" class="manga-btn btn-parchment px-2.5 py-1 font-mono-code text-[11px] font-bold">Sabaody: 399</button>
+          <button type="button" onclick="jumpToEpisodeCheckpoint(517)" class="manga-btn btn-parchment px-2.5 py-1 font-mono-code text-[11px] font-bold">New World: 517</button>
+          <button type="button" onclick="jumpToEpisodeCheckpoint(890)" class="manga-btn btn-parchment px-2.5 py-1 font-mono-code text-[11px] font-bold">Wano: 890</button>
+          <button type="button" onclick="jumpToEpisodeCheckpoint(1086)" class="manga-btn btn-parchment px-2.5 py-1 font-mono-code text-[11px] font-bold">Egghead: 1086</button>
+          <button type="button" onclick="jumpToEpisodeCheckpoint(1156)" class="manga-btn btn-navy px-2.5 py-1 font-mono-code text-[11px] font-bold">Elbaph: 1156</button>
+        </div>
+
+        <!-- Active Up-Next Strip -->
+        <div class="p-3 bg-[#f3e4c3] border-2 border-[#1e1610] rounded flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-2">
+              <span id="up-next-badge" class="px-2 py-0.5 bg-[#e0a526] text-[#1e1610] border border-[#1e1610] font-mono-code text-xs font-bold rounded">
+                UP NEXT: EP. #1
+              </span>
+              <span id="up-next-type-tag"></span>
+              <span id="up-next-arc-label" class="font-mono-code text-xs font-semibold text-[#5c432d]">
+                Romance Dawn Arc
+              </span>
+            </div>
+            <div id="up-next-title-text" class="font-bold text-base sm:text-lg text-[#1e1610] mt-1 leading-snug">
+              I'm Luffy! The Man Who's Gonna Be King of the Pirates!
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <button type="button" onclick="markUpNextWatched()" class="manga-btn btn-gold px-3.5 py-2 font-mono-code text-xs font-bold">
+              ✓ Complete &amp; Next
+            </button>
+            <button type="button" onclick="scrollToEpisode(currentUpNextEp)" class="manga-btn btn-parchment px-2.5 py-2 font-mono-code text-xs font-bold" title="Jump to Up Next row">
+              Locate
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right (5 cols): Voyage Pace Calculator & Share/Backup Actions -->
+      <div class="lg:col-span-5 manga-panel p-4 flex flex-col justify-between gap-3">
+        <div class="flex items-center justify-between border-b-2 border-[#1e1610] pb-2">
+          <h2 class="font-manga text-xl sm:text-2xl tracking-wider text-[#1e1610]">
+            ⏳ VOYAGE PACE CALCULATOR
+          </h2>
+          <div class="flex items-center gap-1.5">
+            <label for="daily-pace-input" class="font-mono-code text-xs font-bold text-[#5c432d]">Eps/Day:</label>
+            <input
+              type="number"
+              id="daily-pace-input"
+              min="1"
+              max="30"
+              value="4"
+              oninput="updateDailyPace(this.value)"
+              class="w-14 px-2 py-0.5 bg-[#fffdf8] border-2 border-[#1e1610] rounded font-mono-code text-xs font-bold text-center text-[#1e1610]"
+            />
+          </div>
+        </div>
+
+        <input
+          type="range"
+          id="daily-pace-slider"
+          min="1"
+          max="20"
+          value="4"
+          oninput="updateDailyPace(this.value)"
+          class="w-full logbook-slider"
+          aria-label="Daily episodes slider"
+        />
+
+        <!-- 4 Telemetry Boxes -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+          <div class="p-2 bg-[#f3e4c3] border-2 border-[#1e1610] rounded">
+            <div class="font-mono-code text-[10px] font-bold text-[#5c432d]">ROUTE LEFT</div>
+            <div id="pace-canon-left" class="font-manga text-xl text-[#1e1610]">1,103</div>
+          </div>
+          <div class="p-2 bg-[#f3e4c3] border-2 border-[#1e1610] rounded">
+            <div class="font-mono-code text-[10px] font-bold text-[#5c432d]">HOURS SAVED</div>
+            <div id="pace-hours-saved" class="font-manga text-xl text-[#1f6b43]">30.8h</div>
+          </div>
+          <div class="p-2 bg-[#f3e4c3] border-2 border-[#1e1610] rounded">
+            <div class="font-mono-code text-[10px] font-bold text-[#5c432d]">EST. DAYS</div>
+            <div id="pace-days-left" class="font-manga text-xl text-[#1b4f72]">276 d</div>
+          </div>
+          <div class="p-2 bg-[#f3e4c3] border-2 border-[#1e1610] rounded">
+            <div class="font-mono-code text-[10px] font-bold text-[#5c432d]">TARGET DATE</div>
+            <div id="pace-target-date" class="font-mono-code text-xs font-bold text-[#b22222] mt-1">Aug 2027</div>
+          </div>
+        </div>
+
+        <!-- Share Link, Portable HTML & JSON Export/Import -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 pt-1 border-t border-[#1e1610]/25">
+          <button type="button" onclick="copyShareCheckpointLink()" class="manga-btn btn-parchment px-2 py-1.5 font-mono-code text-[11px] font-bold">
+            🔗 Share #ep=
+          </button>
+          <button type="button" onclick="downloadPortableHtml()" class="manga-btn btn-parchment px-2 py-1.5 font-mono-code text-[11px] font-bold">
+            📜 Save .HTML
+          </button>
+          <button type="button" onclick="exportJsonProgress()" class="manga-btn btn-parchment px-2 py-1.5 font-mono-code text-[11px] font-bold">
+            💾 Export JSON
+          </button>
+          <label class="manga-btn btn-parchment px-2 py-1.5 font-mono-code text-[11px] font-bold text-center">
+            📂 Import JSON
+            <input type="file" accept=".json" class="hidden" onchange="importJsonProgress(event)" />
+          </label>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================
+         5. NEXT FILLER BLOCK WARNING BANNER & CATCH-UP FILTER TOOLBAR
+         ======================================================================== -->
+    <section class="space-y-3" aria-label="Logbook Filters and Filler Alert">
+
+      <!-- Next Upcoming Filler Block Warning Banner -->
+      <div id="filler-warning-banner" class="hidden manga-panel px-4 py-2.5 bg-[#f9e3b4] border-[#b22222] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div class="text-sm text-[#1e1610]">
+          <span class="font-manga text-lg text-[#b22222] tracking-wide mr-1.5">⚠️ UPCOMING FILLER BLOCK:</span>
+          <span id="filler-warning-text" class="font-semibold"></span>
+        </div>
+        <button type="button" id="skip-filler-block-btn" onclick="skipUpcomingFillerBlock()" class="manga-btn btn-crimson px-3 py-1 font-mono-code text-xs font-bold shrink-0">
+          Skip Filler Block ➔
+        </button>
+      </div>
+
+      <!-- Catch-Up Filter Tabs, Hide Watched, Search & Reset -->
+      <div class="manga-panel p-3.5 flex flex-col gap-3">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-2.5">
+          <!-- Route Filter Tabs -->
+          <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2" role="tablist">
+            <button type="button" data-filter="catchup" onclick="setFilterMode('catchup')" class="filter-tab manga-btn btn-crimson px-3 py-1.5 font-mono-code text-xs font-bold">
+              Catch-Up: Canon + Mixed
+            </button>
+            <button type="button" data-filter="canon" onclick="setFilterMode('canon')" class="filter-tab manga-btn btn-parchment px-3 py-1.5 font-mono-code text-xs font-bold">
+              Pure Canon Only
+            </button>
+            <button type="button" data-filter="all" onclick="setFilterMode('all')" class="filter-tab manga-btn btn-parchment px-3 py-1.5 font-mono-code text-xs font-bold">
+              All Episodes
+            </button>
+            <button type="button" data-filter="filler" onclick="setFilterMode('filler')" class="filter-tab manga-btn btn-parchment px-3 py-1.5 font-mono-code text-xs font-bold">
+              Filler Only
+            </button>
+          </div>
+
+          <!-- Synced Saga / Arc Quick Dropdown -->
+          <div class="flex items-center gap-2">
+            <label for="saga-arc-select" class="font-mono-code text-xs font-bold text-[#5c432d] shrink-0">
+              Jump / Filter:
+            </label>
+            <select
+              id="saga-arc-select"
+              onchange="handleSagaArcDropdown(this.value)"
+              class="w-full sm:w-64 px-2.5 py-1.5 bg-[#fffdf8] border-2 border-[#1e1610] rounded font-mono-code text-xs font-bold text-[#1e1610] focus:outline-none focus:ring-2 focus:ring-[#e0a526]"
+            >
+              <option value="all">All 11 Sagas &amp; 51 Arcs</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Search, Hide Watched, Expand/Collapse, Reset -->
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-[#1e1610]/20">
+          <input
+            type="text"
+            id="episode-search-input"
+            placeholder="Search Ep #, Title, Arc..."
+            oninput="handleSearchInput(this.value)"
+            class="w-full sm:w-56 px-3 py-1.5 bg-[#fffdf8] border-2 border-[#1e1610] rounded font-mono-code text-xs font-bold text-[#1e1610] focus:outline-none focus:ring-2 focus:ring-[#e0a526]"
+          />
+
+          <label class="inline-flex items-center gap-2 px-3 py-1.5 bg-[#f3e4c3] border-2 border-[#1e1610] rounded cursor-pointer select-none">
+            <input type="checkbox" id="hide-watched-toggle" onchange="toggleHideWatched(this.checked)" class="accent-[#1f6b43] w-4 h-4 cursor-pointer" />
+            <span class="font-mono-code text-xs font-bold text-[#1e1610]">Hide Watched</span>
+          </label>
+
+          <button type="button" onclick="expandCollapseAllSagas(true)" class="manga-btn btn-parchment px-2.5 py-1.5 font-mono-code text-xs font-bold">
+            Expand All
+          </button>
+          <button type="button" onclick="expandCollapseAllSagas(false)" class="manga-btn btn-parchment px-2.5 py-1.5 font-mono-code text-xs font-bold">
+            Collapse All
+          </button>
+          <button
+            type="button"
+            id="reset-progress-btn"
+            onclick="handleTwoClickReset()"
+            class="manga-btn btn-parchment px-2.5 py-1.5 font-mono-code text-xs font-bold text-[#b22222]"
+          >
+            Reset Progress
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================================
+         6. CHRONOLOGICAL SAGA & ARC EPISODE LOGBOOK (EPISODES 1–1180+)
+         ======================================================================== -->
+    <main id="sagas-logbook-container" class="space-y-4" aria-label="One Piece Episode Logbook">
+      <!-- Rendered synchronously on DOMContentLoaded -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="pt-2 pb-4 text-center font-mono-code text-xs text-[#5c432d]">
+      ⚓ <strong>Nami's Grand Line Logbook &amp; Wanted Poster</strong> · Chronological Episode Index (Ep. 1–1180+ · 11 Sagas · 51 Arcs) · One Piece © Eiichiro Oda / Shueisha / Toei Animation
+    </footer>
+
+  </div>
+
+  <!-- ==========================================================================
+       LOGBOOK GUIDE MODAL
+       ========================================================================== -->
+  <div id="logbook-guide-modal" class="hidden fixed inset-0 z-50 bg-[#1e1610]/70 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="guide-modal-title">
+    <div class="manga-panel max-w-2xl w-full max-h-[88vh] overflow-y-auto p-5 sm:p-6 space-y-4 bg-[#fbf4e4]">
+      <div class="flex items-center justify-between border-b-2 border-[#1e1610] pb-2.5">
+        <h2 id="guide-modal-title" class="font-manga text-2xl sm:text-3xl tracking-wider text-[#1e1610]">
+          📖 NAVIGATOR'S LOGBOOK GUIDE
+        </h2>
+        <button type="button" onclick="closeGuideModal()" class="manga-btn btn-crimson px-3 py-1 font-mono-code text-xs font-bold">
+          ✕ Close
+        </button>
+      </div>
+
+      <div class="space-y-3 text-sm sm:text-base text-[#1e1610] leading-relaxed">
+        <p>
+          <strong>Welcome aboard!</strong> This logbook tracks every single episode of <em>One Piece</em> from Episode 1 through the latest Elbaph releases and automatically checks the public Jikan &amp; AniList APIs for newly aired episodes.
+        </p>
+
+        <div class="p-3 bg-[#f3e4c3] border-2 border-[#1e1610] rounded space-y-1.5">
+          <div class="font-mono-code text-xs font-bold uppercase text-[#1e1610]">Episode Classification Key</div>
+          <ul class="space-y-1.5 text-sm">
+            <li><span class="px-1.5 py-0.5 bg-[#1f6b43] text-white font-mono-code text-[11px] font-bold rounded">CANON</span> — Directly adapts Eiichiro Oda's manga storyline (including core Amazon Lily Ep. 408–417 and Impel Down Ep. 422–425 &amp; 430–452). Essential viewing.</li>
+            <li><span class="px-1.5 py-0.5 bg-[#b45309] text-white font-mono-code text-[11px] font-bold rounded">MIXED</span> — Adapts canonical manga chapters or cover-page serials blended with anime-original extensions/recaps (such as the Straw Hat Separation cover stories in Amazon Lily Ep. 418–421 and Impel Down Ep. 453–456, or Levely Ep. 878–889). Vital story context—included in the Catch-Up route.</li>
+            <li><span class="px-1.5 py-0.5 bg-[#b22222] text-white font-mono-code text-[11px] font-bold rounded">FILLER</span> — 100% anime-original side stories or recap specials (such as Warship Island Ep. 54–60, G-8 Ep. 196–206, Boss Luffy Ep. 406–407, and Little East Blue Ep. 426–429). Skipping all 77 pure filler episodes saves ~30.8 hours!</li>
+          </ul>
+        </div>
+
+        <div class="space-y-1">
+          <div class="font-bold text-base">Quick Catch-Up Tips:</div>
+          <ul class="list-disc pl-5 space-y-1 text-sm">
+            <li><strong>Already partway through?</strong> Enter your current episode in the <em>Quick-Start Checkpoint Setter</em> (e.g., <code>399</code>) to mark all earlier episodes watched and jump directly to your current arc.</li>
+            <li><strong>Interactive Voyage Chart:</strong> Click any of the 11 Saga islands on the map to filter and scroll straight to that Saga.</li>
+            <li><strong>Portable Offline Backup:</strong> Click <em>Save .HTML</em> to download a standalone copy of this file with your current progress embedded inside it.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Embedded Portable State Container -->
+  <script id="embedded-logbook-state" type="application/json">null</script>
+
+  <script>
+    /* ==========================================================================
+       1. SAFE STORAGE HELPER (Sandboxed iFrame SecurityError Protection)
+       ========================================================================== */
+    const memoryStorageFallback = new Map();
+    const safeStorage = {
+      getItem(key) {
+        try {
+          if (typeof window !== "undefined" && window.localStorage) {
+            const val = window.localStorage.getItem(key);
+            if (val !== null) return val;
+          }
+        } catch (err) {
+          // Fallback to in-memory Map when localStorage is restricted
+        }
+        return memoryStorageFallback.has(key) ? memoryStorageFallback.get(key) : null;
+      },
+      setItem(key, value) {
+        memoryStorageFallback.set(key, String(value));
+        try {
+          if (typeof window !== "undefined" && window.localStorage) {
+            window.localStorage.setItem(key, String(value));
+          }
+        } catch (err) {
+          // Retain in memoryStorageFallback
+        }
+      },
+      removeItem(key) {
+        memoryStorageFallback.delete(key);
+        try {
+          if (typeof window !== "undefined" && window.localStorage) {
+            window.localStorage.removeItem(key);
+          }
+        } catch (err) {
+          // Ignore
+        }
+      }
+    };
+
+    /* ==========================================================================
+       2. STRICT 4.5-SECOND TIMEOUT FETCH HELPER (Zero-Hang Guarantee)
+       ========================================================================== */
+    async function fetchWithTimeout(url, options = {}, timeoutMs = 4500) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const res = await fetch(url, { ...options, signal: controller.signal });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return await res.json();
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    /* ==========================================================================
+       3. COMPLETE CHRONOLOGICAL DATABASE (11 SAGAS · 51 ARCS · EP. 1–1180)
+       ========================================================================== */
+    const SAGAS_DATA = [
+      {
+        id: "east-blue",
+        shortName: "1. East Blue",
+        name: "1. East Blue Saga",
+        sea: "East Blue",
+        mapX: 75,
+        mapY: 120,
+        arcs: [
+          { id: "romance-dawn", name: "Romance Dawn Arc", start: 1, end: 3 },
+          { id: "orange-town", name: "Orange Town Arc", start: 4, end: 8 },
+          { id: "syrup-village", name: "Syrup Village Arc", start: 9, end: 18 },
+          { id: "baratie", name: "Baratie Arc", start: 19, end: 30 },
+          { id: "arlong-park", name: "Arlong Park Arc", start: 31, end: 44 },
+          { id: "loguetown", name: "Loguetown Arc", start: 45, end: 53 },
+          { id: "warship-island", name: "Warship Island Arc", start: 54, end: 61 }
+        ]
+      },
+      {
+        id: "alabasta",
+        shortName: "2. Arabasta",
+        name: "2. Arabasta Saga",
+        sea: "Grand Line · Paradise",
+        mapX: 206,
+        mapY: 98,
+        arcs: [
+          { id: "reverse-mountain", name: "Reverse Mountain Arc", start: 62, end: 63 },
+          { id: "whisky-peak", name: "Whisky Peak Arc", start: 64, end: 67 },
+          { id: "little-garden", name: "Little Garden Arc", start: 68, end: 77 },
+          { id: "drum-island", name: "Drum Island Arc", start: 78, end: 91 },
+          { id: "alabasta", name: "Arabasta Arc", start: 92, end: 130 },
+          { id: "post-alabasta", name: "Post-Arabasta Arc", start: 131, end: 135 }
+        ]
+      },
+      {
+        id: "sky-island",
+        shortName: "3. Sky Island",
+        name: "3. Sky Island Saga",
+        sea: "White-White Sea",
+        mapX: 302,
+        mapY: 135,
+        arcs: [
+          { id: "goat-island", name: "Goat Island Arc", start: 136, end: 138 },
+          { id: "ruluka-island", name: "Ruluka Island Arc", start: 139, end: 143 },
+          { id: "jaya", name: "Jaya Arc", start: 144, end: 152 },
+          { id: "skypiea", name: "Skypiea Arc", start: 153, end: 195 },
+          { id: "g8", name: "G-8 Arc (Navarone Fortress)", start: 196, end: 206 }
+        ]
+      },
+      {
+        id: "water-7",
+        shortName: "4. Water 7",
+        name: "4. Water 7 Saga",
+        sea: "Grand Line · Paradise",
+        mapX: 398,
+        mapY: 94,
+        arcs: [
+          { id: "long-ring-long-land", name: "Long Ring Long Land Arc", start: 207, end: 219 },
+          { id: "oceans-dream", name: "Ocean's Dream Arc", start: 220, end: 224 },
+          { id: "foxys-return", name: "Foxy's Return Arc", start: 225, end: 226 },
+          { id: "water-7", name: "Water 7 Arc", start: 227, end: 263 },
+          { id: "enies-lobby", name: "Enies Lobby Arc", start: 264, end: 312 },
+          { id: "post-enies-lobby", name: "Post-Enies Lobby Arc", start: 313, end: 325 }
+        ]
+      },
+      {
+        id: "thriller-bark",
+        shortName: "5. Thriller Bark",
+        name: "5. Thriller Bark Saga",
+        sea: "Florian Triangle",
+        mapX: 494,
+        mapY: 135,
+        arcs: [
+          { id: "ice-hunter", name: "Ice Hunter Arc", start: 326, end: 336 },
+          { id: "thriller-bark", name: "Thriller Bark Arc", start: 337, end: 381 },
+          { id: "spa-island", name: "Spa Island Arc", start: 382, end: 384 }
+        ]
+      },
+      {
+        id: "summit-war",
+        shortName: "6. Summit War",
+        name: "6. Summit War Saga",
+        sea: "Sabaody & Marineford",
+        mapX: 590,
+        mapY: 96,
+        arcs: [
+          { id: "sabaody", name: "Sabaody Archipelago Arc", start: 385, end: 405 },
+          { id: "boss-luffy-2", name: "Boss Luffy Historical Special", start: 406, end: 407 },
+          { id: "amazon-lily", name: "Amazon Lily Arc", start: 408, end: 421 },
+          { id: "impel-down", name: "Impel Down Arc", start: 422, end: 456 },
+          { id: "marineford", name: "Marineford Arc", start: 457, end: 489 },
+          { id: "post-war", name: "Post-War Arc", start: 490, end: 516 }
+        ]
+      },
+      {
+        id: "fishman-island",
+        shortName: "7. Fish-Man Isl.",
+        name: "7. Fish-Man Island Saga",
+        sea: "Under the Red Line",
+        mapX: 712,
+        mapY: 128,
+        arcs: [
+          { id: "return-to-sabaody", name: "Return to Sabaody Arc", start: 517, end: 522 },
+          { id: "fishman-island", name: "Fish-Man Island Arc", start: 523, end: 574 }
+        ]
+      },
+      {
+        id: "dressrosa",
+        shortName: "8. Dressrosa",
+        name: "8. Dressrosa Saga",
+        sea: "New World",
+        mapX: 808,
+        mapY: 94,
+        arcs: [
+          { id: "zs-ambition", name: "Z's Ambition Arc", start: 575, end: 578 },
+          { id: "punk-hazard", name: "Punk Hazard Arc", start: 579, end: 625 },
+          { id: "caesar-retrieval", name: "Caesar Retrieval Arc", start: 626, end: 628 },
+          { id: "dressrosa", name: "Dressrosa Arc", start: 629, end: 746 }
+        ]
+      },
+      {
+        id: "whole-cake-island",
+        shortName: "9. Whole Cake",
+        name: "9. Whole Cake Island Saga",
+        sea: "New World · Totto Land",
+        mapX: 904,
+        mapY: 135,
+        arcs: [
+          { id: "silver-mine", name: "Silver Mine Arc", start: 747, end: 750 },
+          { id: "zou", name: "Zou Arc", start: 751, end: 779 },
+          { id: "marine-rookie", name: "Marine Rookie Arc", start: 780, end: 782 },
+          { id: "whole-cake-island", name: "Whole Cake Island Arc", start: 783, end: 877 },
+          { id: "levely", name: "Levely (Reverie) Arc", start: 878, end: 889 }
+        ]
+      },
+      {
+        id: "wano-country",
+        shortName: "10. Wano",
+        name: "10. Wano Country Saga",
+        sea: "New World · Land of Wano",
+        mapX: 1000,
+        mapY: 94,
+        arcs: [
+          { id: "wano-act-1-2", name: "Wano Country: Act 1 & Act 2", start: 890, end: 958 },
+          { id: "wano-oden-raid", name: "Wano Country: Oden's Voyage & Raid", start: 959, end: 1028 },
+          { id: "utas-past", name: "Uta's Past Arc (Film: Red Tie-In)", start: 1029, end: 1030 },
+          { id: "wano-climax", name: "Wano Country: Onigashima Climax & Finale", start: 1031, end: 1085 }
+        ]
+      },
+      {
+        id: "final-saga",
+        shortName: "11. Final Saga",
+        name: "11. Final Saga (Egghead & Elbaph)",
+        sea: "New World · Final Sea",
+        mapX: 1096,
+        mapY: 122,
+        arcs: [
+          { id: "egghead-arrival", name: "Egghead: Future Island Arrival", start: 1086, end: 1108 },
+          { id: "egghead-incident", name: "Egghead: Incident & Kuma's Past", start: 1109, end: 1155 },
+          { id: "elbaph", name: "Elbaph Arc & Ongoing Releases", start: 1156, end: 1180 }
+        ]
+      }
+    ];
+
+    /* Notable Landmark Episode Titles */
+    const LANDMARK_TITLES = {
+      1: "I'm Luffy! The Man Who's Gonna Be King of the Pirates!",
+      2: "Enter the Great Swordsman! Pirate Hunter Roronoa Zoro!",
+      3: "Morgan versus Luffy! Who's the Mysterious Pretty Girl?",
+      4: "Luffy's Past! Enter Red-Haired Shanks!",
+      19: "The Three-Sword Style's Past! Zoro and Kuina's Vow!",
+      24: "Hawk-Eye Mihawk! The Great Swordsman Zoro Falls at Sea!",
+      37: "Luffy Rises! Result of the Broken Promise!",
+      44: "Setting Out with a Smile! Farewell, Hometown Cocoyasi Village!",
+      45: "Bounty! Straw Hat Luffy Becomes Known to the World!",
+      48: "The Town of the Beginning and the End! Landfall at Loguetown!",
+      52: "Buggy's Revenge! The Man Who Smiles on the Execution Platform!",
+      53: "The Legend Has Started! Head for the Grand Line!",
+      61: "An Angry Showdown! Cross the Red Line!",
+      62: "The First Line of Defense? The Giant Whale Laboon Appears!",
+      78: "Nami's Sick? Beyond the Snow Falling on the Sea!",
+      91: "Goodbye Drum Island! I'm Going Out to Sea!",
+      126: "I Will Surpass You! Rain Falls in Arabasta!",
+      129: "It All Started On That Day! Vivi Tells the Story of Her Adventure!",
+      130: "Scent of Danger! The Seventh Member Is Nico Robin!",
+      151: "100 Million Berry Man! World's Greatest Power and Pirate Blackbeard!",
+      192: "Miracle on Skypiea! The Love Song Heard in the Clouds!",
+      196: "A State of Emergency Is Issued! A Notorious Pirate Ship Has Infiltrated!",
+      207: "Great Adventure in Long Ring Long Land!",
+      227: "Navy Headquarters Admiral Aokiji! The Ferocity of an Ultimate Powerhouse!",
+      236: "Luffy vs. Usopp! Collision of Two Men's Pride!",
+      278: "Say You Want to Live! We Are Your Friends!!",
+      309: "Fists Full of Emotion! Luffy Unleashes Gatling with All His Might!",
+      312: "Thank You, Merry! Snow Falls over the Sea of Parting!",
+      377: "The Pain of My Crewmates Is My Pain! Zoro's Desperate Fight!",
+      381: "A New Crewmate! The Musician — Humming Brook!",
+      396: "The Fist Explodes! Destroy the Auction!",
+      399: "Break Through the Siege! The Navy vs. the Three Captains!",
+      400: "Roger and Rayleigh! The King of the Pirates and His Right Hand!",
+      405: "Eliminated Friends! The Final Day of the Straw Hat Crew!",
+      408: "Landing! The All-Female Island, Amazon Lily!",
+      415: "Hancock's Confession! The Sisters' Abhorrent Past!",
+      417: "Love Is a Hurricane! Hancock Madly in Love!",
+      418: "The Friends' Whereabouts! The Science of Weather and the Mechanical Island!",
+      421: "The Friends' Whereabouts! A Negative Princess and the King of Demons!",
+      422: "A Deadly Infiltration! The Underwater Prison Impel Down!",
+      438: "A Paradise in Hell! Impel Down — Level 5.5!",
+      453: "The Friends' Whereabouts! The Weatheria Report and the Cyborg Animals!",
+      456: "The Friends' Whereabouts! A Huge Tomb and the Panty Debt!",
+      483: "Looking for the Answer! Fire Fist Ace Dies on the Battlefield!",
+      485: "Settling the Score! Whitebeard vs. The Blackbeard Pirates!",
+      489: "Here Comes Shanks! The War of the Best Is Finally Over!",
+      516: "Luffy's Training Begins! To the Promised Place in 2 Years!",
+      517: "The Beginning of the New Chapter! The Straw Hat Crew Reunites!",
+      522: "Everyone Together! Luffy Sets Out for the New World!",
+      574: "To the New World! Heading for the Ultimate Sea!",
+      625: "Tense! Aokiji vs. Doflamingo!",
+      726: "Fourth Gear! The Phenomenal Bounce-Man!",
+      733: "Attack on a Celestial! Luffy's King Kong Gun of Anger!",
+      751: "Curtain-Up on a New Adventure! Arriving at the Phantom Island, Zou!",
+      767: "A Volatile Situation! The Dog and the Cat and the Samurai!",
+      808: "A Heartbreaking Duel! Luffy vs. Sanji — Part 2!",
+      870: "A Fist of Divine Speed! Another Gear Four Application Activated!",
+      877: "The Parting Time! Pudding's Last Wish!",
+      878: "The World in Shock! The Fifth Emperor of the Sea Arrives!",
+      890: "Marco! The Keeper of Whitebeard's Last Memento!",
+      957: "Big News! An Incident That Will Affect the Seven Warlords!",
+      968: "The King of the Pirates Is Born! Arriving at the Last Island!",
+      982: "Kaido's Trump Card! The Tobi Roppo Appear!",
+      1015: "Straw Hat Luffy! The Man Who Will Become the King of the Pirates!",
+      1061: "The Strike of an Ifrit! Sanji vs. Queen!",
+      1062: "The Three-Sword Style of the Supreme King! Zoro vs. King!",
+      1071: "Luffy's Peak — Attained! Gear Five!",
+      1074: "I Trust Momo! Luffy's Final Powerful Technique!",
+      1085: "The Last Curtain! Luffy and Momonosuke's Vow!",
+      1086: "A New Emperor! Buggy the Genius Jester!",
+      1089: "Entering a New Chapter! Luffy and Sabo's Paths!",
+      1100: "Powers on a Different Level! Luffy vs. Lucci!",
+      1122: "The Last Lesson! Impact Inherited!",
+      1155: "Setting Sail for Elbaph! The Giant Warrior Pirates' Welcome!",
+      1180: "Beyond the Horizon! The Log Pose Points to Laugh Tale!"
+    };
+
+    /* ==========================================================================
+       4. EXACT EPISODE-LEVEL CLASSIFICATIONS (CANON / MIXED / FILLER)
+       ========================================================================== */
+    const FILLER_RANGES = [
+      [54, 60],
+      [98, 99],
+      [102, 102],
+      [131, 143],
+      [196, 206],
+      [220, 226],
+      [279, 283],
+      [291, 292],
+      [303, 303],
+      [317, 319],
+      [326, 336],
+      [382, 384],
+      [406, 407],
+      [426, 429],
+      [457, 458],
+      [492, 492],
+      [542, 542],
+      [575, 578],
+      [590, 590],
+      [626, 628],
+      [747, 750],
+      [780, 782],
+      [895, 896],
+      [907, 907],
+      [1029, 1030]
+    ];
+
+    const MIXED_RANGES = [
+      [46, 47],
+      [61, 61],
+      [68, 69],
+      [93, 93],
+      [101, 101],
+      [227, 228],
+      [418, 421],   // Amazon Lily: Straw Hat Separation cover stories
+      [453, 456],   // Impel Down: Straw Hat Separation cover stories
+      [499, 499],
+      [506, 506],
+      [878, 889],   // Levely (Reverie) Arc
+      [988, 989],
+      [1004, 1004],
+      [1015, 1015]
+    ];
+
+    const FILLER_SET = new Set();
+    for (const [start, end] of FILLER_RANGES) {
+      for (let n = start; n <= end; n++) FILLER_SET.add(n);
+    }
+
+    const MIXED_SET = new Set();
+    for (const [start, end] of MIXED_RANGES) {
+      for (let n = start; n <= end; n++) MIXED_SET.add(n);
+    }
+
+    const DYNAMIC_EPISODE_TYPES = {};
+
+    function getEpisodeType(ep) {
+      if (DYNAMIC_EPISODE_TYPES[ep]) return DYNAMIC_EPISODE_TYPES[ep];
+      if (FILLER_SET.has(ep)) return "filler";
+      if (MIXED_SET.has(ep)) return "mixed";
+      return "canon";
+    }
+
+    let EPISODE_CATALOG = [];
+    const EPISODE_MAP = new Map();
+
+    function rebuildEpisodeCatalog() {
+      EPISODE_CATALOG = [];
+      EPISODE_MAP.clear();
+      for (const saga of SAGAS_DATA) {
+        for (const arc of saga.arcs) {
+          for (let epNum = arc.start; epNum <= arc.end; epNum++) {
+            const epType = getEpisodeType(epNum);
+            const customTitle = LANDMARK_TITLES[epNum];
+            const fallbackTitle = epType === "filler"
+              ? `${arc.name} — Side Story / Special (Ep. ${epNum})`
+              : epType === "mixed"
+              ? `${arc.name} — Cover Story / Extended Episode ${epNum}`
+              : `${arc.name} — Episode ${epNum}`;
+
+            const epObj = {
+              num: epNum,
+              title: customTitle || fallbackTitle,
+              type: epType,
+              arcId: arc.id,
+              arcName: arc.name,
+              sagaId: saga.id,
+              sagaName: saga.name
+            };
+            EPISODE_CATALOG.push(epObj);
+            EPISODE_MAP.set(epNum, epObj);
+          }
+        }
+      }
+    }
+
+    rebuildEpisodeCatalog();
+
+    /* ==========================================================================
+       5. WANTED POSTER RANKS, BOUNTIES & CREW EMBLEMS
+       ========================================================================== */
+    const PIRATE_BOUNTY_TIERS = [
+      { minWatched: 0,    rank: "CHORE BOY",             bounty: "0" },
+      { minWatched: 1,    rank: "ROOKIE",                bounty: "30,000,000" },
+      { minWatched: 61,   rank: "SUPERNOVA",             bounty: "300,000,000" },
+      { minWatched: 385,  rank: "WARLORD / COMMANDER",   bounty: "1,057,000,000" },
+      { minWatched: 890,  rank: "EMPEROR OF THE SEA",    bounty: "3,000,000,000" },
+      { minWatched: 1156, rank: "KING OF THE PIRATES",   bounty: "5,600,000,000" }
+    ];
+
+    const CREW_EMBLEMS = [
+      {
+        id: "luffy",
+        label: "LUFFY",
+        svg: `<svg viewBox="0 0 64 64" class="w-10 h-10"><line x1="10" y1="12" x2="54" y2="52" stroke="#1e1610" stroke-width="4.5" stroke-linecap="round"/><line x1="54" y1="12" x2="10" y2="52" stroke="#1e1610" stroke-width="4.5" stroke-linecap="round"/><circle cx="32" cy="34" r="13" fill="#fffaf0" stroke="#1e1610" stroke-width="2.2"/><rect x="25" y="42" width="14" height="8" rx="2" fill="#fffaf0" stroke="#1e1610" stroke-width="2"/><circle cx="27" cy="35" r="3" fill="#1e1610"/><circle cx="37" cy="35" r="3" fill="#1e1610"/><path d="M17,26 C17,12 47,12 47,26 Z" fill="#f3c64f" stroke="#1e1610" stroke-width="2"/><path d="M18,22 Q32,25 46,22 L47,26 Q32,29 17,26 Z" fill="#b22222"/><ellipse cx="32" cy="27" rx="21" ry="4.5" fill="#f7d06b" stroke="#1e1610" stroke-width="2"/></svg>`
+      },
+      {
+        id: "zoro",
+        label: "ZORO",
+        svg: `<svg viewBox="0 0 64 64" class="w-10 h-10"><line x1="10" y1="14" x2="54" y2="50" stroke="#1f6b43" stroke-width="4" stroke-linecap="round"/><line x1="54" y1="14" x2="10" y2="50" stroke="#1f6b43" stroke-width="4" stroke-linecap="round"/><line x1="8" y1="32" x2="56" y2="32" stroke="#1e1610" stroke-width="3.5" stroke-linecap="round"/><circle cx="32" cy="32" r="13" fill="#fffaf0" stroke="#1e1610" stroke-width="2.2"/><path d="M19,28 Q32,20 45,28 L45,22 Q32,14 19,22 Z" fill="#1f6b43" stroke="#1e1610" stroke-width="1.6"/><circle cx="27" cy="34" r="2.8" fill="#1e1610"/><circle cx="37" cy="34" r="2.8" fill="#1e1610"/></svg>`
+      },
+      {
+        id: "nami",
+        label: "NAMI",
+        svg: `<svg viewBox="0 0 64 64" class="w-10 h-10"><circle cx="32" cy="35" r="17" fill="#e87a24" stroke="#1e1610" stroke-width="2.5"/><path d="M32,18 C34,10 43,10 45,16 C39,19 35,19 32,18 Z" fill="#1f6b43" stroke="#1e1610" stroke-width="2"/><path d="M16,26 L26,20 L22,30 Z" fill="#1b4f72" stroke="#1e1610" stroke-width="1.8"/><circle cx="27" cy="36" r="2.5" fill="#1e1610"/><circle cx="37" cy="36" r="2.5" fill="#1e1610"/><path d="M27,43 Q32,47 37,43" fill="none" stroke="#1e1610" stroke-width="2" stroke-linecap="round"/></svg>`
+      },
+      {
+        id: "sanji",
+        label: "SANJI",
+        svg: `<svg viewBox="0 0 64 64" class="w-10 h-10"><circle cx="32" cy="34" r="16" fill="#fffaf0" stroke="#1e1610" stroke-width="2.5"/><path d="M16,30 C16,16 48,16 48,30 C40,24 28,26 16,30 Z" fill="#f3c64f" stroke="#1e1610" stroke-width="2"/><path d="M35,34 C38,31 43,32 43,36 C43,39 39,40 38,38" fill="none" stroke="#1e1610" stroke-width="2.2" stroke-linecap="round"/><circle cx="26" cy="36" r="2.5" fill="#1e1610"/></svg>`
+      },
+      {
+        id: "chopper",
+        label: "CHOPPER",
+        svg: `<svg viewBox="0 0 64 64" class="w-10 h-10"><rect x="20" y="14" width="24" height="18" rx="3" fill="#d96b8a" stroke="#1e1610" stroke-width="2.2"/><ellipse cx="32" cy="32" rx="22" ry="5" fill="#d96b8a" stroke="#1e1610" stroke-width="2.2"/><line x1="29" y1="20" x2="35" y2="26" stroke="#fffaf0" stroke-width="2.5"/><line x1="35" y1="20" x2="29" y2="26" stroke="#fffaf0" stroke-width="2.5"/><circle cx="32" cy="43" r="11" fill="#c68e53" stroke="#1e1610" stroke-width="2.2"/><circle cx="32" cy="44" r="3" fill="#1b4f72"/></svg>`
+      },
+      {
+        id: "law",
+        label: "HEART",
+        svg: `<svg viewBox="0 0 64 64" class="w-10 h-10"><circle cx="32" cy="32" r="22" fill="#e0a526" stroke="#1e1610" stroke-width="2.5"/><circle cx="32" cy="32" r="13" fill="#fffaf0" stroke="#1e1610" stroke-width="2.2"/><circle cx="28" cy="30" r="2.5" fill="#1e1610"/><circle cx="36" cy="30" r="2.5" fill="#1e1610"/><path d="M25,36 Q32,43 39,36" fill="none" stroke="#1e1610" stroke-width="2.4" stroke-linecap="round"/></svg>`
+      }
+    ];
+
+    /* ==========================================================================
+       6. APPLICATION STATE & PERSISTENCE
+       ========================================================================== */
+    const STORAGE_KEY = "nami_grand_line_logbook_public_v2";
+    const JIKAN_CACHE_KEY = "nami_jikan_episodes_cache_v2";
+    const ANILIST_CACHE_KEY = "nami_anilist_broadcast_cache_v2";
+
+    let appState = {
+      pirateName: "MONKEY D. LUFFY",
+      emblemIndex: 0,
+      watched: new Set(),
+      filterMode: "catchup", // "catchup" | "canon" | "all" | "filler"
+      hideWatched: false,
+      selectedSaga: "all",
+      searchQuery: "",
+      dailyPace: 4,
+      openSagas: new Set(["east-blue"])
+    };
+
+    let currentUpNextEp = 1;
+    let countdownIntervalId = null;
+    let resetPending = false;
+    let resetTimerId = null;
+
+    function loadInitialState() {
+      // 1. Check embedded portable HTML state if present
+      try {
+        const embeddedScript = document.getElementById("embedded-logbook-state");
+        if (embeddedScript && embeddedScript.textContent && embeddedScript.textContent.trim() !== "null") {
+          applySerializedState(JSON.parse(embeddedScript.textContent));
+        }
+      } catch (e) {
+        // Ignore
+      }
+
+      // 2. Check safeStorage saved state
+      const raw = safeStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        try {
+          applySerializedState(JSON.parse(raw));
+        } catch (e) {
+          // Ignore
+        }
+      }
+
+      // 3. Check URL query (?ep=399) or hash (#ep=399)
+      try {
+        const combined = (window.location.search || "") + "&" + (window.location.hash || "");
+        const match = combined.match(/ep=(\d+)/i);
+        if (match) {
+          const epTarget = Math.max(1, Math.min(EPISODE_CATALOG.length, parseInt(match[1], 10)));
+          appState.watched.clear();
+          for (let i = 1; i < epTarget; i++) {
+            appState.watched.add(i);
+          }
+        }
+      } catch (e) {
+        // Ignore
+      }
+
+      const upNext = computeUpNextEpisode();
+      if (upNext) {
+        appState.openSagas = new Set([upNext.sagaId]);
+      }
+    }
+
+    function applySerializedState(parsed) {
+      if (!parsed || typeof parsed !== "object") return;
+      if (typeof parsed.pirateName === "string" && parsed.pirateName.trim()) {
+        appState.pirateName = parsed.pirateName.trim().slice(0, 26);
+      }
+      if (typeof parsed.emblemIndex === "number" && parsed.emblemIndex >= 0 && parsed.emblemIndex < CREW_EMBLEMS.length) {
+        appState.emblemIndex = parsed.emblemIndex;
+      }
+      if (Array.isArray(parsed.watched)) {
+        appState.watched = new Set(
+          parsed.watched.map(Number).filter((n) => Number.isInteger(n) && n >= 1 && n <= EPISODE_CATALOG.length)
+        );
+      }
+      if (parsed.filterMode) appState.filterMode = parsed.filterMode;
+      if (typeof parsed.hideWatched === "boolean") appState.hideWatched = parsed.hideWatched;
+      if (typeof parsed.dailyPace === "number") appState.dailyPace = parsed.dailyPace;
+    }
+
+    function persistState() {
+      const data = {
+        pirateName: appState.pirateName,
+        emblemIndex: appState.emblemIndex,
+        watched: Array.from(appState.watched),
+        filterMode: appState.filterMode,
+        hideWatched: appState.hideWatched,
+        dailyPace: appState.dailyPace
+      };
+      safeStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    /* ==========================================================================
+       7. BULLETPROOF BACKGROUND SYNCING (JIKAN v4 + ANILIST GRAPHQL)
+       ========================================================================== */
+    async function syncLiveData(forceRefresh = false) {
+      const statusPill = document.getElementById("snail-status-pill");
+      const snailWrap = document.getElementById("den-den-snail-wrap");
+      const syncBtn = document.getElementById("sync-now-btn");
+
+      if (snailWrap) snailWrap.classList.add("snail-ringing");
+      if (statusPill) {
+        statusPill.textContent = "PURU PURU... SYNCING";
+        statusPill.className = "inline-block px-2 py-0.5 bg-[#1b4f72] text-[#fffaf0] border border-[#1e1610] rounded font-mono-code text-[11px] font-bold";
+      }
+      if (syncBtn) syncBtn.disabled = true;
+
+      const now = Date.now();
+      const SIX_HOURS = 6 * 60 * 60 * 1000;
+      const THREE_HOURS = 3 * 60 * 60 * 1000;
+
+      let jikanCached = null;
+      let anilistCached = null;
+      try {
+        jikanCached = JSON.parse(safeStorage.getItem(JIKAN_CACHE_KEY) || "null");
+        anilistCached = JSON.parse(safeStorage.getItem(ANILIST_CACHE_KEY) || "null");
+      } catch (e) {
+        // Ignore
+      }
+
+      // Mandatory 5.5-second failsafe watchdog so Den Den Mushi NEVER stays stuck syncing
+      let settled = false;
+      const watchdog = setTimeout(() => {
+        if (!settled) {
+          settled = true;
+          finalizeSnailUI(false, EPISODE_CATALOG.length, anilistCached ? anilistCached.nextAiring : null);
+          if (syncBtn) syncBtn.disabled = false;
+        }
+      }, 5500);
+
+      try {
+        const tasks = [];
+
+        // Task 1: Jikan REST API v4 delta fetch (page 12+ for episodes > 1180)
+        if (!forceRefresh && jikanCached && (now - jikanCached.ts < SIX_HOURS)) {
+          applyJikanEpisodes(jikanCached.episodes || []);
+          tasks.push(Promise.resolve({ ok: true, source: "cache" }));
+        } else {
+          const fetchJikanDelta = async () => {
+            let page = Math.ceil(1180 / 100); // Page 12
+            let hasNext = true;
+            const collected = [];
+            while (hasNext && page <= 20) {
+              const json = await fetchWithTimeout(
+                "https://api.jikan.moe/v4/anime/21/episodes?page=" + page,
+                {},
+                4500
+              );
+              const list = Array.isArray(json && json.data) ? json.data : [];
+              collected.push(...list);
+              hasNext = Boolean(json && json.pagination && json.pagination.has_next_page);
+              page++;
+            }
+            safeStorage.setItem(JIKAN_CACHE_KEY, JSON.stringify({ ts: Date.now(), episodes: collected }));
+            applyJikanEpisodes(collected);
+            return { ok: true, source: "live" };
+          };
+          tasks.push(fetchJikanDelta());
+        }
+
+        // Task 2: AniList GraphQL nextAiringEpisode query
+        if (!forceRefresh && anilistCached && (now - anilistCached.ts < THREE_HOURS)) {
+          tasks.push(Promise.resolve({ ok: true, nextAiring: anilistCached.nextAiring || null }));
+        } else {
+          const query = `
+            query {
+              Media(idMal: 21, type: ANIME) {
+                status
+                nextAiringEpisode {
+                  airingAt
+                  episode
+                }
+              }
+            }
+          `;
+          tasks.push(
+            fetchWithTimeout(
+              "https://graphql.anilist.co",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: JSON.stringify({ query })
+              },
+              4500
+            ).then((json) => {
+              const nextAiring = (json && json.data && json.data.Media && json.data.Media.nextAiringEpisode) || null;
+              safeStorage.setItem(ANILIST_CACHE_KEY, JSON.stringify({ ts: Date.now(), nextAiring }));
+              return { ok: true, nextAiring };
+            })
+          );
+        }
+
+        const results = await Promise.allSettled(tasks);
+        let anyOk = false;
+        let nextAiring = anilistCached ? anilistCached.nextAiring : null;
+
+        for (const r of results) {
+          if (r.status === "fulfilled" && r.value && r.value.ok) {
+            anyOk = true;
+            if ("nextAiring" in r.value) {
+              nextAiring = r.value.nextAiring;
+            }
+          }
+        }
+
+        if (!settled) {
+          settled = true;
+          clearTimeout(watchdog);
+          finalizeSnailUI(anyOk, EPISODE_CATALOG.length, nextAiring);
+        }
+      } catch (err) {
+        if (!settled) {
+          settled = true;
+          clearTimeout(watchdog);
+          finalizeSnailUI(false, EPISODE_CATALOG.length, anilistCached ? anilistCached.nextAiring : null);
+        }
+      } finally {
+        if (syncBtn) syncBtn.disabled = false;
+      }
+    }
+
+    function applyJikanEpisodes(items) {
+      let addedNew = false;
+      const finalSaga = SAGAS_DATA[SAGAS_DATA.length - 1];
+      const elbaphArc = finalSaga.arcs[finalSaga.arcs.length - 1];
+
+      for (const item of items) {
+        const malId = Number(item.mal_id);
+        if (!Number.isInteger(malId) || malId <= 0) continue;
+        if (malId > 1180) {
+          if (item.title) LANDMARK_TITLES[malId] = item.title;
+          if (item.filler || item.recap) {
+            DYNAMIC_EPISODE_TYPES[malId] = "filler";
+          } else {
+            DYNAMIC_EPISODE_TYPES[malId] = "canon";
+          }
+          if (malId > elbaphArc.end) {
+            elbaphArc.end = malId;
+            addedNew = true;
+          }
+        } else if (malId >= 1156 && item.title && !LANDMARK_TITLES[malId]) {
+          LANDMARK_TITLES[malId] = item.title;
+        }
+      }
+
+      if (addedNew) {
+        rebuildEpisodeCatalog();
+        populateSagaArcDropdown();
+        renderAll();
+      }
+    }
+
+    function finalizeSnailUI(isLive, maxEp, nextAiring) {
+      const statusPill = document.getElementById("snail-status-pill");
+      const snailWrap = document.getElementById("den-den-snail-wrap");
+      const countdownDisplay = document.getElementById("snail-countdown-display");
+      const bannerMaxEl = document.getElementById("banner-max-ep");
+
+      if (snailWrap) snailWrap.classList.remove("snail-ringing");
+      if (bannerMaxEl) bannerMaxEl.textContent = String(maxEp);
+
+      if (statusPill) {
+        if (isLive) {
+          statusPill.textContent = "LIVE LOG SYNCED · UP TO EP. " + maxEp;
+          statusPill.className = "inline-block px-2 py-0.5 bg-[#1f6b43] text-[#fffaf0] border border-[#1e1610] rounded font-mono-code text-[11px] font-bold";
+        } else {
+          statusPill.textContent = "GRAND LINE ARCHIVE · EP. 1–" + maxEp + " VERIFIED";
+          statusPill.className = "inline-block px-2 py-0.5 bg-[#5c432d] text-[#f7d57c] border border-[#1e1610] rounded font-mono-code text-[11px] font-bold";
+        }
+      }
+
+      if (countdownIntervalId) {
+        clearInterval(countdownIntervalId);
+        countdownIntervalId = null;
+      }
+
+      if (nextAiring && nextAiring.airingAt && nextAiring.airingAt * 1000 > Date.now()) {
+        const targetMs = nextAiring.airingAt * 1000;
+        const epNum = nextAiring.episode || (maxEp + 1);
+        const airDateStr = new Date(targetMs).toLocaleDateString(undefined, {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        });
+        const tick = () => {
+          const diff = targetMs - Date.now();
+          if (diff <= 0) {
+            if (countdownDisplay) countdownDisplay.textContent = "EPISODE #" + epNum + " AIRING NOW!";
+            clearInterval(countdownIntervalId);
+            return;
+          }
+          const d = Math.floor(diff / 86400000);
+          const h = Math.floor((diff % 86400000) / 3600000);
+          const m = Math.floor((diff % 3600000) / 60000);
+          const s = Math.floor((diff % 60000) / 1000);
+          const pad = (n) => String(n).padStart(2, "0");
+          if (countdownDisplay) {
+            countdownDisplay.textContent = "EP. #" + epNum + " IN " + pad(d) + "d " + pad(h) + "h " + pad(m) + "m " + pad(s) + "s (" + airDateStr + ")";
+          }
+        };
+        tick();
+        countdownIntervalId = setInterval(tick, 1000);
+      } else if (countdownDisplay) {
+        countdownDisplay.textContent = "BETWEEN SEASONS · RETURNS 2027 (NEXT: EP. " + (maxEp + 1) + ")";
+      }
+    }
+
+    /* ==========================================================================
+       8. FILTERING, UP-NEXT ENGINE & UPCOMING FILLER DETECTOR
+       ========================================================================== */
+    function matchesFilterMode(ep, mode = appState.filterMode) {
+      if (mode === "all") return true;
+      if (mode === "catchup") return ep.type === "canon" || ep.type === "mixed";
+      if (mode === "canon") return ep.type === "canon";
+      if (mode === "filler") return ep.type === "filler";
+      return true;
+    }
+
+    function computeUpNextEpisode() {
+      for (const ep of EPISODE_CATALOG) {
+        if (!appState.watched.has(ep.num) && matchesFilterMode(ep)) {
+          return ep;
+        }
+      }
+      for (const ep of EPISODE_CATALOG) {
+        if (!appState.watched.has(ep.num)) {
+          return ep;
+        }
+      }
+      return EPISODE_CATALOG[EPISODE_CATALOG.length - 1];
+    }
+
+    function detectUpcomingFillerBlock(fromEpNum) {
+      const scanMax = Math.min(EPISODE_CATALOG.length, fromEpNum + 14);
+      let firstFiller = null;
+
+      for (let n = fromEpNum; n <= scanMax; n++) {
+        const ep = EPISODE_MAP.get(n);
+        if (ep && ep.type === "filler") {
+          firstFiller = ep;
+          break;
+        }
+      }
+      if (!firstFiller) return null;
+
+      let lastFillerNum = firstFiller.num;
+      while (lastFillerNum + 1 <= EPISODE_CATALOG.length) {
+        const next = EPISODE_MAP.get(lastFillerNum + 1);
+        if (next && next.type === "filler") {
+          lastFillerNum++;
+        } else {
+          break;
+        }
+      }
+
+      return {
+        start: firstFiller.num,
+        end: lastFillerNum,
+        arcName: firstFiller.arcName,
+        distance: firstFiller.num - fromEpNum,
+        resumeEp: Math.min(EPISODE_CATALOG.length, lastFillerNum + 1)
+      };
+    }
+
+    function getClassificationBadge(type) {
+      if (type === "canon") {
+        return `<span class="px-2 py-0.5 bg-[#1f6b43] text-[#fffaf0] font-mono-code text-[10px] font-bold uppercase rounded">Canon</span>`;
+      }
+      if (type === "mixed") {
+        return `<span class="px-2 py-0.5 bg-[#b45309] text-[#fffaf0] font-mono-code text-[10px] font-bold uppercase rounded">Mixed</span>`;
+      }
+      return `<span class="px-2 py-0.5 bg-[#b22222] text-[#fffaf0] font-mono-code text-[10px] font-bold uppercase rounded">Filler</span>`;
+    }
+
+    function getArcBreakdownBadge(arc) {
+      let canonCount = 0;
+      let mixedCount = 0;
+      let fillerCount = 0;
+
+      for (let n = arc.start; n <= arc.end; n++) {
+        const t = getEpisodeType(n);
+        if (t === "canon") canonCount++;
+        else if (t === "mixed") mixedCount++;
+        else fillerCount++;
+      }
+
+      const parts = [];
+      if (canonCount > 0) parts.push(canonCount + " CANON");
+      if (mixedCount > 0) parts.push(mixedCount + " MIXED");
+      if (fillerCount > 0) parts.push(fillerCount + " FILLER");
+
+      const bgClass = fillerCount > 0 && canonCount === 0 && mixedCount === 0
+        ? "bg-[#b22222]"
+        : canonCount === 0 && mixedCount > 0
+        ? "bg-[#b45309]"
+        : "bg-[#1f6b43]";
+
+      return `<span class="px-2 py-0.5 ${bgClass} text-[#fffaf0] font-mono-code text-[10px] font-bold uppercase rounded">${parts.join(" · ")}</span>`;
+    }
+
+    /* ==========================================================================
+       9. RENDERING: TELEMETRY CARDS, SVG VOYAGE CHART MAP, DECK & LOGBOOK
+       ========================================================================== */
+    function renderTelemetryCards() {
+      const totalEps = EPISODE_CATALOG.length;
+      const watchedCount = appState.watched.size;
+      const pct = totalEps > 0 ? Math.min(100, (watchedCount / totalEps) * 100) : 0;
+
+      let catchUpLeft = 0;
+      let totalFillerSavedHours = 0;
+      for (const ep of EPISODE_CATALOG) {
+        if (ep.type === "filler") {
+          totalFillerSavedHours += 24 / 60;
+        }
+        if (!appState.watched.has(ep.num) && (ep.type === "canon" || ep.type === "mixed")) {
+          catchUpLeft++;
+        }
+      }
+
+      const upNext = computeUpNextEpisode();
+      currentUpNextEp = upNext.num;
+
+      // Card 1: Log Pose Compass
+      document.getElementById("compass-pct-badge").textContent = pct.toFixed(1) + "%";
+      document.getElementById("compass-ep-readout").textContent = "EPISODE #" + upNext.num;
+      document.getElementById("compass-saga-readout").textContent = upNext.sagaName;
+      document.getElementById("compass-arc-readout").textContent = upNext.arcName;
+      document.getElementById("compass-watched-summary").textContent = watchedCount.toLocaleString() + " Watched · " + catchUpLeft.toLocaleString() + " Left";
+      document.getElementById("compass-hours-saved").textContent = totalFillerSavedHours.toFixed(1) + "h Saved";
+      document.getElementById("compass-progress-fill").style.width = pct + "%";
+
+      const needleDeg = -135 + (pct / 100) * 270;
+      const needleEl = document.getElementById("log-pose-needle");
+      if (needleEl) {
+        needleEl.style.transform = "rotate(" + needleDeg.toFixed(1) + "deg)";
+      }
+
+      // Card 2: Marine Wanted Poster
+      let activeTier = PIRATE_BOUNTY_TIERS[0];
+      for (const tier of PIRATE_BOUNTY_TIERS) {
+        if (watchedCount >= tier.minWatched) {
+          activeTier = tier;
+        }
+      }
+
+      const emblem = CREW_EMBLEMS[appState.emblemIndex] || CREW_EMBLEMS[0];
+      const emblemBox = document.getElementById("crew-emblem-svg-box");
+      const emblemLabel = document.getElementById("crew-emblem-label");
+      if (emblemBox) emblemBox.innerHTML = emblem.svg;
+      if (emblemLabel) emblemLabel.textContent = emblem.label;
+
+      const nameInput = document.getElementById("wanted-pirate-name-input");
+      if (nameInput && document.activeElement !== nameInput) {
+        nameInput.value = appState.pirateName;
+      }
+      document.getElementById("wanted-rank-title").textContent = activeTier.rank;
+      document.getElementById("wanted-bounty-amount").textContent = activeTier.bounty;
+      document.getElementById("wanted-watched-stat").textContent = watchedCount.toLocaleString() + " Watched";
+      document.getElementById("wanted-canon-left-stat").textContent = catchUpLeft.toLocaleString() + " Catch-Up Left";
+    }
+
+    /* Native SVG DOM Construction for the Interactive Grand Line & Red Line Voyage Chart */
+    function createSvgEl(tag, attrs = {}) {
+      const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+      for (const [key, val] of Object.entries(attrs)) {
+        el.setAttribute(key, String(val));
+      }
+      return el;
+    }
+
+    function renderVoyageChartMap() {
+      const svg = document.getElementById("voyage-chart-svg");
+      if (!svg) return;
+
+      while (svg.firstChild) {
+        svg.removeChild(svg.firstChild);
+      }
+
+      const upNext = computeUpNextEpisode();
+      const activeSagaId = upNext ? upNext.sagaId : "east-blue";
+
+      // 1. Sea Chart Latitude / Longitude Grid
+      const gridGroup = createSvgEl("g", { stroke: "#1e1610", "stroke-opacity": "0.08", "stroke-width": "1" });
+      for (const y of [58, 117, 176]) {
+        gridGroup.appendChild(createSvgEl("line", { x1: 0, y1: y, x2: 1160, y2: y }));
+      }
+      for (const x of [290, 580, 870]) {
+        gridGroup.appendChild(createSvgEl("line", { x1: x, y1: 0, x2: x, y2: 235 }));
+      }
+      svg.appendChild(gridGroup);
+
+      // 2. Geographical Sea Regions
+      // East Blue (x: 0..145)
+      svg.appendChild(createSvgEl("rect", { x: 0, y: 0, width: 145, height: 235, fill: "rgba(27, 79, 114, 0.07)" }));
+      const eastLabel = createSvgEl("text", {
+        x: 72, y: 22, "text-anchor": "middle",
+        "font-family": "JetBrains Mono, monospace", "font-size": "11", "font-weight": "bold",
+        fill: "#1b4f72", "letter-spacing": "1.5"
+      });
+      eastLabel.textContent = "EAST BLUE";
+      svg.appendChild(eastLabel);
+
+      // Reverse Mountain Barrier
+      svg.appendChild(createSvgEl("path", {
+        d: "M145,0 L155,0 L163,117 L155,235 L145,235 L153,117 Z",
+        fill: "#8e402a", stroke: "#1e1610", "stroke-width": "1.8"
+      }));
+      const revLabel = createSvgEl("text", {
+        x: 154, y: 224, "text-anchor": "middle",
+        "font-family": "JetBrains Mono, monospace", "font-size": "9", "font-weight": "bold",
+        fill: "#8e402a"
+      });
+      revLabel.textContent = "REVERSE MOUNTAIN";
+      svg.appendChild(revLabel);
+
+      // Paradise (Grand Line First Half, x: 155..645)
+      svg.appendChild(createSvgEl("rect", { x: 155, y: 0, width: 490, height: 235, fill: "rgba(27, 79, 114, 0.03)" }));
+      const paraLabel = createSvgEl("text", {
+        x: 400, y: 22, "text-anchor": "middle",
+        "font-family": "JetBrains Mono, monospace", "font-size": "11", "font-weight": "bold",
+        fill: "#1b4f72", "letter-spacing": "2"
+      });
+      paraLabel.textContent = "PARADISE (GRAND LINE)";
+      svg.appendChild(paraLabel);
+
+      // The Red Line Barrier
+      svg.appendChild(createSvgEl("rect", {
+        x: 645, y: 0, width: 16, height: 235,
+        fill: "#b22222", stroke: "#1e1610", "stroke-width": "1.8"
+      }));
+      const redLabel = createSvgEl("text", {
+        x: 653, y: 224, "text-anchor": "middle",
+        "font-family": "JetBrains Mono, monospace", "font-size": "9", "font-weight": "bold",
+        fill: "#b22222"
+      });
+      redLabel.textContent = "THE RED LINE";
+      svg.appendChild(redLabel);
+
+      // The New World (x: 661..1160)
+      svg.appendChild(createSvgEl("rect", { x: 661, y: 0, width: 499, height: 235, fill: "rgba(178, 34, 34, 0.05)" }));
+      const nwLabel = createSvgEl("text", {
+        x: 910, y: 22, "text-anchor": "middle",
+        "font-family": "JetBrains Mono, monospace", "font-size": "11", "font-weight": "bold",
+        fill: "#b22222", "letter-spacing": "2"
+      });
+      nwLabel.textContent = "THE NEW WORLD";
+      svg.appendChild(nwLabel);
+
+      // 3. Dashed Log Pose Sea Route Connecting All 11 Sagas
+      const routePath = createSvgEl("path", {
+        d: "M 75,120 Q 154,80 206,98 T 302,135 T 398,94 T 494,135 T 590,96 Q 653,146 712,128 T 808,94 T 904,135 T 1000,94 T 1096,122",
+        fill: "none",
+        stroke: "#b22222",
+        "stroke-width": "2.8",
+        "stroke-dasharray": "7 5"
+      });
+      svg.appendChild(routePath);
+
+      // 4. Plot All 11 Sagas as Interactive Clickable Island Ports
+      const islandsLayer = createSvgEl("g", { id: "voyage-islands-layer" });
+
+      for (const saga of SAGAS_DATA) {
+        let filteredTotal = 0;
+        let filteredWatched = 0;
+        for (const arc of saga.arcs) {
+          for (let n = arc.start; n <= arc.end; n++) {
+            const epObj = EPISODE_MAP.get(n);
+            if (!epObj) continue;
+            if (matchesFilterMode(epObj)) {
+              filteredTotal++;
+              if (appState.watched.has(n)) filteredWatched++;
+            }
+          }
+        }
+
+        const epStart = saga.arcs[0].start;
+        const epEnd = saga.arcs[saga.arcs.length - 1].end;
+        const isCompleted = filteredTotal > 0 && filteredWatched === filteredTotal;
+        const isActive = saga.id === activeSagaId;
+        const isSelected = appState.selectedSaga === saga.id;
+
+        const x = saga.mapX;
+        const y = saga.mapY;
+
+        const portGroup = createSvgEl("g", {
+          class: "voyage-island",
+          role: "button",
+          tabindex: "0",
+          "aria-label": "Filter " + saga.name
+        });
+        portGroup.addEventListener("click", () => selectSagaFromMap(saga.id));
+        portGroup.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            selectSagaFromMap(saga.id);
+          }
+        });
+
+        // Pulsing gold compass ring on active Saga
+        if (isActive) {
+          portGroup.appendChild(createSvgEl("circle", {
+            cx: x, cy: y, r: 21,
+            fill: "none", stroke: "#e0a526", "stroke-width": "3",
+            class: "active-saga-pulse"
+          }));
+        }
+
+        // Sea Ripple & Island Silhouette
+        portGroup.appendChild(createSvgEl("ellipse", {
+          cx: x, cy: y + 4, rx: 20, ry: 8,
+          fill: "rgba(27, 79, 114, 0.24)"
+        }));
+
+        const islandFill = isSelected ? "#e0a526" : isCompleted ? "#1f6b43" : "#c69952";
+        portGroup.appendChild(createSvgEl("path", {
+          class: "island-landmass",
+          d: `M${x - 17},${y + 4} Q${x - 9},${y - 13} ${x},${y - 7} Q${x + 10},${y - 14} ${x + 17},${y + 4} Z`,
+          fill: islandFill,
+          stroke: "#1e1610",
+          "stroke-width": isSelected ? "3" : "2.2"
+        }));
+
+        // Crimson Jolly Roger flag when completed
+        if (isCompleted) {
+          const flagG = createSvgEl("g", { transform: `translate(${x - 2}, ${y - 36})` });
+          flagG.appendChild(createSvgEl("line", { x1: 0, y1: 0, x2: 0, y2: 25, stroke: "#1e1610", "stroke-width": "2.2" }));
+          flagG.appendChild(createSvgEl("polygon", { points: "0,1 18,7 0,13", fill: "#b22222", stroke: "#1e1610", "stroke-width": "1.4" }));
+          flagG.appendChild(createSvgEl("circle", { cx: 5.5, cy: 7, r: 2.2, fill: "#fffaf0" }));
+          portGroup.appendChild(flagG);
+        }
+
+        // Pirate ship icon on active Saga
+        if (isActive) {
+          const shipG = createSvgEl("g", { transform: `translate(${x - 14}, ${y - 39})` });
+          shipG.appendChild(createSvgEl("path", { d: "M3,20 L25,20 L21,26 L7,26 Z", fill: "#8e402a", stroke: "#1e1610", "stroke-width": "1.6" }));
+          shipG.appendChild(createSvgEl("line", { x1: 14, y1: 4, x2: 14, y2: 20, stroke: "#1e1610", "stroke-width": "2" }));
+          shipG.appendChild(createSvgEl("path", { d: "M14,5 Q24,11 14,17 Z", fill: "#fffaf0", stroke: "#1e1610", "stroke-width": "1.4" }));
+          shipG.appendChild(createSvgEl("circle", { cx: 25, cy: 19, r: 3, fill: "#e0a526", stroke: "#1e1610", "stroke-width": "1.2" }));
+          portGroup.appendChild(shipG);
+        }
+
+        // Island Plaque with Saga Title & Watched/Total Filtered Count
+        portGroup.appendChild(createSvgEl("rect", {
+          x: x - 44, y: y + 12, width: 88, height: 34, rx: 4,
+          fill: isSelected ? "#1e1610" : "#fbf4e4",
+          stroke: "#1e1610",
+          "stroke-width": "1.6"
+        }));
+
+        const titleTxt = createSvgEl("text", {
+          x: x, y: y + 24, "text-anchor": "middle",
+          "font-family": "JetBrains Mono, monospace", "font-size": "8.8", "font-weight": "bold",
+          fill: isSelected ? "#f7d57c" : "#1e1610"
+        });
+        titleTxt.textContent = saga.shortName;
+        portGroup.appendChild(titleTxt);
+
+        const countTxt = createSvgEl("text", {
+          x: x, y: y + 36, "text-anchor": "middle",
+          "font-family": "JetBrains Mono, monospace", "font-size": "7.8", "font-weight": "bold",
+          fill: isSelected ? "#fffaf0" : "#5c432d"
+        });
+        const endLabel = saga.id === "final-saga" ? epEnd + "+" : String(epEnd);
+        countTxt.textContent = "Ep." + epStart + "-" + endLabel + " (" + filteredWatched + "/" + filteredTotal + ")";
+        portGroup.appendChild(countTxt);
+
+        islandsLayer.appendChild(portGroup);
+      }
+
+      svg.appendChild(islandsLayer);
+
+      // Update Map Status Readout & Dropdown Sync
+      const mapStatus = document.getElementById("map-filter-status");
+      const showAllBtn = document.getElementById("show-all-sagas-btn");
+      const dropdown = document.getElementById("saga-arc-select");
+
+      if (appState.selectedSaga === "all") {
+        if (mapStatus) mapStatus.textContent = "Showing: All 11 Sagas";
+        if (showAllBtn) showAllBtn.classList.add("opacity-60");
+        if (dropdown && dropdown.value.startsWith("saga:")) dropdown.value = "all";
+      } else {
+        const sObj = SAGAS_DATA.find((s) => s.id === appState.selectedSaga);
+        if (mapStatus) mapStatus.textContent = "Filtered: " + (sObj ? sObj.name : appState.selectedSaga);
+        if (showAllBtn) showAllBtn.classList.remove("opacity-60");
+        if (dropdown) dropdown.value = "saga:" + appState.selectedSaga;
+      }
+    }
+
+    function renderNavigationDeckAndFillerAlert() {
+      const upNext = computeUpNextEpisode();
+      currentUpNextEp = upNext.num;
+      const allCaughtUp = appState.watched.size >= EPISODE_CATALOG.length;
+
+      document.getElementById("up-next-badge").textContent = allCaughtUp
+        ? "CAUGHT UP · EP. #" + upNext.num
+        : "UP NEXT: EP. #" + upNext.num;
+      document.getElementById("up-next-type-tag").innerHTML = getClassificationBadge(upNext.type);
+      document.getElementById("up-next-arc-label").textContent = upNext.sagaName + " · " + upNext.arcName;
+      document.getElementById("up-next-title-text").textContent = allCaughtUp
+        ? "All " + EPISODE_CATALOG.length + " Episodes Completed! Ready for Episode " + (EPISODE_CATALOG.length + 1) + " in 2027."
+        : upNext.title;
+
+      // Pace Calculator
+      const pace = Math.max(1, Math.min(30, Number(appState.dailyPace) || 4));
+      let routeRemaining = 0;
+      let fillerHoursSaved = 0;
+
+      for (const ep of EPISODE_CATALOG) {
+        if (!appState.watched.has(ep.num)) {
+          if (matchesFilterMode(ep)) {
+            routeRemaining++;
+          } else if (ep.type === "filler") {
+            fillerHoursSaved += 24 / 60;
+          }
+        }
+      }
+
+      const daysLeft = Math.ceil(routeRemaining / pace);
+      const targetDate = new Date();
+      targetDate.setDate(targetDate.getDate() + daysLeft);
+
+      document.getElementById("pace-canon-left").textContent = routeRemaining.toLocaleString();
+      document.getElementById("pace-hours-saved").textContent = fillerHoursSaved.toFixed(1) + "h";
+      document.getElementById("pace-days-left").textContent = daysLeft.toLocaleString() + " d";
+      document.getElementById("pace-target-date").textContent = routeRemaining === 0
+        ? "Caught Up!"
+        : targetDate.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+
+      // Next Upcoming Filler Block Warning Banner
+      const warningBanner = document.getElementById("filler-warning-banner");
+      const warningText = document.getElementById("filler-warning-text");
+      const skipBtn = document.getElementById("skip-filler-block-btn");
+
+      const fillerBlock = allCaughtUp ? null : detectUpcomingFillerBlock(upNext.num);
+      if (fillerBlock) {
+        warningBanner.classList.remove("hidden");
+        const rangeLabel = fillerBlock.start === fillerBlock.end
+          ? "Episode " + fillerBlock.start
+          : "Episodes " + fillerBlock.start + "–" + fillerBlock.end;
+        const note = appState.filterMode === "catchup" || appState.filterMode === "canon"
+          ? "Automatically bypassed by your Catch-Up filter."
+          : fillerBlock.distance === 0
+          ? "You are currently on a pure filler episode."
+          : "Arrives in " + fillerBlock.distance + " episode" + (fillerBlock.distance === 1 ? "" : "s") + ".";
+        warningText.textContent = rangeLabel + " (" + fillerBlock.arcName + ") is pure filler. " + note;
+        skipBtn.dataset.resumeEp = String(fillerBlock.resumeEp);
+      } else {
+        warningBanner.classList.add("hidden");
+      }
+    }
+
+    function renderSagasLogbook() {
+      const container = document.getElementById("sagas-logbook-container");
+      if (!container) return;
+
+      const q = appState.searchQuery.trim().toLowerCase();
+      const sagaHtmlList = [];
+
+      for (const saga of SAGAS_DATA) {
+        if (appState.selectedSaga !== "all" && saga.id !== appState.selectedSaga) {
+          continue;
+        }
+
+        let sagaTotal = 0;
+        let sagaWatched = 0;
+        const arcCardsHtml = [];
+
+        for (const arc of saga.arcs) {
+          const visibleEpisodes = [];
+          for (let n = arc.start; n <= arc.end; n++) {
+            const ep = EPISODE_MAP.get(n);
+            if (!ep) continue;
+            sagaTotal++;
+            if (appState.watched.has(n)) sagaWatched++;
+
+            if (!matchesFilterMode(ep)) continue;
+            if (appState.hideWatched && appState.watched.has(n)) continue;
+
+            if (q) {
+              const hitNum = String(ep.num).includes(q) || ("#" + ep.num).includes(q);
+              const hitTitle = ep.title.toLowerCase().includes(q);
+              const hitArc = ep.arcName.toLowerCase().includes(q);
+              if (!hitNum && !hitTitle && !hitArc) continue;
+            }
+
+            visibleEpisodes.push(ep);
+          }
+
+          if (visibleEpisodes.length === 0) continue;
+
+          const rowsHtml = visibleEpisodes.map((ep) => {
+            const isWatched = appState.watched.has(ep.num);
+            const isUpNext = ep.num === currentUpNextEp && !isWatched;
+
+            const rowClasses = isUpNext
+              ? "bg-[#f7d57c]/45 border-l-4 border-l-[#b22222]"
+              : isWatched
+              ? "bg-[#e7d6b3]/50 opacity-80"
+              : "bg-[#fbf4e4] hover:bg-[#f3e4c3]";
+
+            return `
+              <div id="episode-row-${ep.num}" class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-3.5 py-2.5 border-b border-[#1e1610]/20 ${rowClasses} transition-colors">
+                <div class="flex items-center gap-3 min-w-0">
+                  <!-- Clean 22x22px Ink-Bordered Square Checkbox -->
+                  <button
+                    type="button"
+                    role="checkbox"
+                    aria-checked="${isWatched}"
+                    aria-label="Mark Episode ${ep.num} as watched"
+                    onclick="toggleEpisodeWatched(${ep.num})"
+                    class="ep-checkbox"
+                  >
+                    ${
+                      isWatched
+                        ? `<svg viewBox="0 0 16 16" class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 4.5"/></svg>`
+                        : ""
+                    }
+                  </button>
+
+                  <div class="min-w-0">
+                    <div class="flex flex-wrap items-center gap-2">
+                      <span class="font-mono-code text-xs font-bold text-[#1e1610]">EP. #${ep.num}</span>
+                      ${getClassificationBadge(ep.type)}
+                      ${isUpNext ? `<span class="px-1.5 py-0.5 bg-[#b22222] text-[#fffaf0] font-mono-code text-[10px] font-bold uppercase rounded">Up Next</span>` : ""}
+                    </div>
+                    <div class="text-sm sm:text-base font-semibold text-[#1e1610] ${isWatched ? "line-through text-[#5c432d]" : ""} break-words">
+                      ${escapeHtml(ep.title)}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-end shrink-0 pl-8 sm:pl-0">
+                  <button
+                    type="button"
+                    onclick="watchUpToEpisode(${ep.num})"
+                    class="manga-btn btn-parchment px-2.5 py-1 font-mono-code text-[11px] font-bold"
+                    title="Mark Episodes 1–${ep.num - 1} watched and set Episode #${ep.num} as Up Next"
+                  >
+                    Watch Up To Here
+                  </button>
+                </div>
+              </div>
+            `;
+          }).join("");
+
+          arcCardsHtml.push(`
+            <div id="arc-card-${arc.id}" class="border-2 border-[#1e1610] rounded bg-[#fbf4e4] overflow-hidden">
+              <div class="px-3.5 py-2 bg-[#ead7b0] border-b-2 border-[#1e1610] flex flex-wrap items-center justify-between gap-2">
+                <div class="flex flex-wrap items-center gap-2">
+                  ${getArcBreakdownBadge(arc)}
+                  <h4 class="font-nautical text-base sm:text-lg font-black text-[#1e1610]">${escapeHtml(arc.name)}</h4>
+                  <span class="font-mono-code text-xs font-bold text-[#5c432d]">(Ep. ${arc.start}–${arc.end})</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" onclick="markArcWatched(${arc.start}, ${arc.end}, true)" class="manga-btn btn-gold px-2.5 py-0.5 font-mono-code text-[11px] font-bold">
+                    Mark Arc Watched
+                  </button>
+                  <button type="button" onclick="markArcWatched(${arc.start}, ${arc.end}, false)" class="manga-btn btn-parchment px-2.5 py-0.5 font-mono-code text-[11px] font-bold">
+                    Reset Arc
+                  </button>
+                </div>
+              </div>
+              <div>${rowsHtml}</div>
+            </div>
+          `);
+        }
+
+        if (arcCardsHtml.length === 0) continue;
+
+        const isOpen = appState.openSagas.has(saga.id) || q.length > 0 || appState.selectedSaga !== "all";
+        const pct = sagaTotal > 0 ? Math.round((sagaWatched / sagaTotal) * 100) : 0;
+        const epFirst = saga.arcs[0].start;
+        const epLast = saga.arcs[saga.arcs.length - 1].end;
+
+        sagaHtmlList.push(`
+          <article id="saga-panel-${saga.id}" class="manga-panel overflow-hidden">
+            <button
+              type="button"
+              onclick="toggleSagaAccordion('${saga.id}')"
+              aria-expanded="${isOpen}"
+              class="w-full px-4 sm:px-5 py-3.5 bg-[#f3e4c3] hover:bg-[#ead6ac] transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-left border-b-2 ${isOpen ? "border-[#1e1610]" : "border-transparent"}"
+            >
+              <div class="flex items-center gap-3">
+                <span class="w-7 h-7 rounded border-2 border-[#1e1610] bg-[#fffdf8] font-mono-code font-bold text-sm flex items-center justify-center shrink-0">
+                  ${isOpen ? "▼" : "▶"}
+                </span>
+                <div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h3 class="font-nautical text-lg sm:text-xl font-black text-[#1e1610]">${escapeHtml(saga.name)}</h3>
+                    <span class="px-2 py-0.5 bg-[#1e1610] text-[#f7d57c] font-mono-code text-xs font-bold rounded">
+                      Ep. ${epFirst}–${epLast}
+                    </span>
+                    ${pct === 100 ? `<span class="px-2 py-0.5 bg-[#1f6b43] text-[#fffaf0] font-mono-code text-[11px] font-bold rounded">COMPLETED</span>` : ""}
+                  </div>
+                  <p class="font-mono-code text-xs text-[#5c432d] mt-0.5">${escapeHtml(saga.sea)} · ${saga.arcs.length} Story Arcs</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 pl-10 sm:pl-0 shrink-0">
+                <div class="text-right">
+                  <div class="font-mono-code text-xs font-bold text-[#1e1610]">${sagaWatched} / ${sagaTotal} (${pct}%)</div>
+                  <div class="w-32 h-2 bg-[#d5bc89] border border-[#1e1610] rounded-full overflow-hidden mt-1">
+                    <div class="h-full bg-[#1f6b43]" style="width: ${pct}%;"></div>
+                  </div>
+                </div>
+              </div>
+            </button>
+
+            ${isOpen ? `<div class="p-3.5 sm:p-4 space-y-3 bg-[#f7edd6]">${arcCardsHtml.join("")}</div>` : ""}
+          </article>
+        `);
+      }
+
+      if (sagaHtmlList.length === 0) {
+        container.innerHTML = `
+          <div class="manga-panel p-6 text-center space-y-2.5">
+            <div class="font-nautical text-xl font-black text-[#1e1610]">No Episodes Match Your Current Filter</div>
+            <p class="text-sm text-[#5c432d]">Clear your search query, uncheck "Hide Watched", or reset the Saga map filter.</p>
+            <button type="button" onclick="resetAllFilters()" class="manga-btn btn-gold px-4 py-1.5 font-mono-code text-xs font-bold">
+              Show All Episodes
+            </button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = sagaHtmlList.join("");
+      }
+    }
+
+    function updateFilterTabButtons() {
+      document.querySelectorAll(".filter-tab").forEach((btn) => {
+        const mode = btn.getAttribute("data-filter");
+        if (mode === appState.filterMode) {
+          btn.classList.remove("btn-parchment");
+          btn.classList.add("btn-crimson");
+        } else {
+          btn.classList.remove("btn-crimson");
+          btn.classList.add("btn-parchment");
+        }
+      });
+    }
+
+    function renderAll() {
+      renderTelemetryCards();
+      renderVoyageChartMap();
+      renderNavigationDeckAndFillerAlert();
+      updateFilterTabButtons();
+      renderSagasLogbook();
+    }
+
+    /* ==========================================================================
+       10. USER INTERACTION HANDLERS
+       ========================================================================== */
+    function toggleEpisodeWatched(epNum) {
+      if (appState.watched.has(epNum)) {
+        appState.watched.delete(epNum);
+      } else {
+        appState.watched.add(epNum);
+      }
+      persistState();
+      renderAll();
+    }
+
+    function updatePirateName(val) {
+      appState.pirateName = (val || "").trim().slice(0, 26) || "MONKEY D. LUFFY";
+      persistState();
+    }
+
+    function cycleCrewEmblem() {
+      appState.emblemIndex = (appState.emblemIndex + 1) % CREW_EMBLEMS.length;
+      persistState();
+      renderTelemetryCards();
+    }
+
+    function selectSagaFromMap(sagaId) {
+      appState.selectedSaga = sagaId;
+      if (sagaId !== "all") {
+        appState.openSagas.add(sagaId);
+      }
+      renderVoyageChartMap();
+      renderSagasLogbook();
+
+      if (sagaId !== "all") {
+        setTimeout(() => {
+          const targetEl = document.getElementById("saga-panel-" + sagaId) || document.getElementById("sagas-logbook-container");
+          if (targetEl) targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 40);
+      }
+    }
+
+    function handleCheckpointSubmit(event) {
+      if (event) event.preventDefault();
+      const input = document.getElementById("checkpoint-ep-input");
+      const rawVal = input ? parseInt(input.value, 10) : NaN;
+      if (!Number.isInteger(rawVal) || rawVal < 1) {
+        showToast("⚠️ Enter a valid episode number between 1 and " + EPISODE_CATALOG.length + ".");
+        return;
+      }
+      jumpToEpisodeCheckpoint(rawVal);
+    }
+
+    function jumpToEpisodeCheckpoint(epNum) {
+      const clamped = Math.max(1, Math.min(EPISODE_CATALOG.length, Number(epNum) || 1));
+      appState.watched.clear();
+      for (let i = 1; i < clamped; i++) {
+        appState.watched.add(i);
+      }
+      const epObj = EPISODE_MAP.get(clamped);
+      if (epObj) {
+        appState.selectedSaga = "all";
+        appState.openSagas = new Set([epObj.sagaId]);
+      }
+      try {
+        window.history.replaceState(null, "", "#ep=" + clamped);
+      } catch (e) {
+        // Ignore in restricted iframe
+      }
+      persistState();
+      renderAll();
+      showToast("🧭 Checkpoint set! Marked Ep. 1–" + (clamped - 1) + " watched. Up Next: Ep. #" + clamped + ".");
+      setTimeout(() => scrollToEpisode(clamped), 60);
+    }
+
+    function markUpNextWatched() {
+      const ep = computeUpNextEpisode();
+      if (!ep) return;
+      appState.watched.add(ep.num);
+      const nextEp = computeUpNextEpisode();
+      if (nextEp) {
+        appState.openSagas.add(nextEp.sagaId);
+      }
+      persistState();
+      renderAll();
+      showToast("✓ Completed Episode #" + ep.num + "! Up Next: Episode #" + nextEp.num + ".");
+    }
+
+    function watchUpToEpisode(epNum) {
+      const clamped = Math.max(1, Math.min(EPISODE_CATALOG.length, Number(epNum) || 1));
+      appState.watched.clear();
+      for (let i = 1; i < clamped; i++) {
+        appState.watched.add(i);
+      }
+      const epObj = EPISODE_MAP.get(clamped);
+      if (epObj) {
+        appState.openSagas.add(epObj.sagaId);
+      }
+      persistState();
+      renderAll();
+      showToast("⚓ Marked Episodes 1–" + (clamped - 1) + " watched. Up Next: Episode #" + clamped + ".");
+    }
+
+    function markArcWatched(startEp, endEp, watchedFlag) {
+      for (let n = startEp; n <= endEp; n++) {
+        if (watchedFlag) {
+          appState.watched.add(n);
+        } else {
+          appState.watched.delete(n);
+        }
+      }
+      persistState();
+      renderAll();
+      showToast(watchedFlag
+        ? "✓ Marked Episodes " + startEp + "–" + endEp + " watched!"
+        : "↺ Reset Episodes " + startEp + "–" + endEp + "."
+      );
+    }
+
+    function skipUpcomingFillerBlock() {
+      const btn = document.getElementById("skip-filler-block-btn");
+      const resumeEp = btn ? parseInt(btn.dataset.resumeEp || "1", 10) : 1;
+      jumpToEpisodeCheckpoint(resumeEp);
+    }
+
+    function populateSagaArcDropdown() {
+      const select = document.getElementById("saga-arc-select");
+      if (!select) return;
+      const totalArcs = SAGAS_DATA.reduce((acc, s) => acc + s.arcs.length, 0);
+      const options = [`<option value="all">All 11 Sagas &amp; ${totalArcs} Arcs</option>`];
+      for (const saga of SAGAS_DATA) {
+        const first = saga.arcs[0].start;
+        const last = saga.arcs[saga.arcs.length - 1].end;
+        options.push(`<optgroup label="${escapeHtml(saga.name)} (Ep. ${first}–${last})">`);
+        options.push(`<option value="saga:${saga.id}">★ Entire ${escapeHtml(saga.name)}</option>`);
+        for (const arc of saga.arcs) {
+          options.push(`<option value="arc:${saga.id}:${arc.id}">↳ ${escapeHtml(arc.name)} (Ep. ${arc.start}–${arc.end})</option>`);
+        }
+        options.push(`</optgroup>`);
+      }
+      select.innerHTML = options.join("");
+    }
+
+    function handleSagaArcDropdown(val) {
+      if (!val || val === "all") {
+        selectSagaFromMap("all");
+        return;
+      }
+      if (val.startsWith("saga:")) {
+        selectSagaFromMap(val.slice(5));
+        return;
+      }
+      if (val.startsWith("arc:")) {
+        const parts = val.split(":");
+        const sagaId = parts[1];
+        const arcId = parts[2];
+        appState.selectedSaga = sagaId;
+        appState.openSagas.add(sagaId);
+        renderVoyageChartMap();
+        renderSagasLogbook();
+        setTimeout(() => {
+          const arcEl = document.getElementById("arc-card-" + arcId);
+          if (arcEl) arcEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 60);
+      }
+    }
+
+    function scrollToEpisode(epNum) {
+      const epObj = EPISODE_MAP.get(epNum);
+      if (!epObj) return;
+      if (appState.selectedSaga !== "all" && appState.selectedSaga !== epObj.sagaId) {
+        appState.selectedSaga = "all";
+      }
+      appState.openSagas.add(epObj.sagaId);
+      renderVoyageChartMap();
+      renderSagasLogbook();
+      const row = document.getElementById("episode-row-" + epNum);
+      if (row) {
+        row.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
+    function updateDailyPace(val) {
+      const pace = Math.max(1, Math.min(30, parseInt(val, 10) || 4));
+      appState.dailyPace = pace;
+      document.getElementById("daily-pace-input").value = String(pace);
+      document.getElementById("daily-pace-slider").value = String(Math.min(20, pace));
+      persistState();
+      renderNavigationDeckAndFillerAlert();
+    }
+
+    function setFilterMode(mode) {
+      appState.filterMode = mode;
+      persistState();
+      renderAll();
+    }
+
+    function toggleHideWatched(checked) {
+      appState.hideWatched = checked;
+      persistState();
+      renderSagasLogbook();
+    }
+
+    function handleSearchInput(val) {
+      appState.searchQuery = val;
+      renderSagasLogbook();
+    }
+
+    function toggleSagaAccordion(sagaId) {
+      if (appState.openSagas.has(sagaId)) {
+        appState.openSagas.delete(sagaId);
+      } else {
+        appState.openSagas.add(sagaId);
+      }
+      renderSagasLogbook();
+    }
+
+    function expandCollapseAllSagas(expand) {
+      if (expand) {
+        appState.openSagas = new Set(SAGAS_DATA.map((s) => s.id));
+      } else {
+        appState.openSagas.clear();
+      }
+      renderSagasLogbook();
+    }
+
+    function resetAllFilters() {
+      appState.filterMode = "catchup";
+      appState.hideWatched = false;
+      appState.selectedSaga = "all";
+      appState.searchQuery = "";
+      document.getElementById("episode-search-input").value = "";
+      document.getElementById("hide-watched-toggle").checked = false;
+      persistState();
+      renderAll();
+    }
+
+    function handleTwoClickReset() {
+      const btn = document.getElementById("reset-progress-btn");
+      if (!resetPending) {
+        resetPending = true;
+        if (btn) {
+          btn.textContent = "Confirm Reset?";
+          btn.classList.remove("btn-parchment", "text-[#b22222]");
+          btn.classList.add("btn-crimson");
+        }
+        resetTimerId = setTimeout(() => {
+          resetPending = false;
+          if (btn) {
+            btn.textContent = "Reset Progress";
+            btn.classList.remove("btn-crimson");
+            btn.classList.add("btn-parchment", "text-[#b22222]");
+          }
+        }, 3500);
+        return;
+      }
+
+      clearTimeout(resetTimerId);
+      resetPending = false;
+      if (btn) {
+        btn.textContent = "Reset Progress";
+        btn.classList.remove("btn-crimson");
+        btn.classList.add("btn-parchment", "text-[#b22222]");
+      }
+      appState.watched.clear();
+      appState.selectedSaga = "all";
+      appState.openSagas = new Set(["east-blue"]);
+      persistState();
+      renderAll();
+      showToast("🧭 Progress reset cleanly to Episode #1.");
+    }
+
+    /* ==========================================================================
+       11. SHARE LINK, PORTABLE .HTML & JSON BACKUPS
+       ========================================================================== */
+    function copyShareCheckpointLink() {
+      const epNum = currentUpNextEp || 1;
+      try {
+        window.history.replaceState(null, "", "#ep=" + epNum);
+      } catch (e) {
+        // Ignore if restricted in iframe
+      }
+      const shareUrl = window.location.origin + window.location.pathname + "#ep=" + epNum;
+      const tempInput = document.createElement("textarea");
+      tempInput.value = shareUrl;
+      tempInput.style.position = "fixed";
+      tempInput.style.opacity = "0";
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand("copy");
+        showToast("🔗 Copied checkpoint link (#ep=" + epNum + ") to clipboard!");
+      } catch (err) {
+        showToast("🔗 URL hash set to #ep=" + epNum);
+      } finally {
+        document.body.removeChild(tempInput);
+      }
+    }
+
+    function downloadPortableHtml() {
+      const payload = JSON.stringify({
+        pirateName: appState.pirateName,
+        emblemIndex: appState.emblemIndex,
+        watched: Array.from(appState.watched),
+        filterMode: appState.filterMode,
+        dailyPace: appState.dailyPace
+      });
+      const docClone = document.documentElement.cloneNode(true);
+      const stateScript = docClone.querySelector("#embedded-logbook-state");
+      if (stateScript) {
+        stateScript.textContent = payload;
+      }
+      const htmlContent = "<!DOCTYPE html>\n" + docClone.outerHTML;
+      const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "nami_grand_line_logbook_ep" + currentUpNextEp + ".html";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("📜 Downloaded portable offline HTML (Ep. #" + currentUpNextEp + ")!");
+    }
+
+    function exportJsonProgress() {
+      const exportData = {
+        app: "Nami's Grand Line Logbook & Wanted Poster",
+        pirateName: appState.pirateName,
+        emblemIndex: appState.emblemIndex,
+        exportedAt: new Date().toISOString(),
+        upNextEpisode: currentUpNextEp,
+        watched: Array.from(appState.watched).sort((a, b) => a - b),
+        filterMode: appState.filterMode,
+        dailyPace: appState.dailyPace
+      };
+      const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "one_piece_logbook_ep" + currentUpNextEp + ".json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("💾 Exported JSON backup (" + appState.watched.size + " episodes watched).");
+    }
+
+    function importJsonProgress(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(String(e.target.result));
+          if (!parsed || !Array.isArray(parsed.watched)) {
+            throw new Error("Invalid JSON save format");
+          }
+          applySerializedState(parsed);
+          persistState();
+          renderAll();
+          showToast("📂 Restored JSON backup (" + appState.watched.size + " episodes watched)!");
+        } catch (err) {
+          showToast("⚠️ Could not read JSON backup file.");
+        } finally {
+          event.target.value = "";
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    /* ==========================================================================
+       12. MODAL & TOAST HELPERS
+       ========================================================================== */
+    function openGuideModal() {
+      const modal = document.getElementById("logbook-guide-modal");
+      if (modal) modal.classList.remove("hidden");
+    }
+
+    function closeGuideModal() {
+      const modal = document.getElementById("logbook-guide-modal");
+      if (modal) modal.classList.add("hidden");
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeGuideModal();
+    });
+
+    const guideModalEl = document.getElementById("logbook-guide-modal");
+    if (guideModalEl) {
+      guideModalEl.addEventListener("click", (e) => {
+        if (e.target && e.target.id === "logbook-guide-modal") closeGuideModal();
+      });
+    }
+
+    function showToast(message) {
+      const container = document.getElementById("toast-container");
+      if (!container) return;
+      const toast = document.createElement("div");
+      toast.className = "px-4 py-2.5 bg-[#1e1610] text-[#fffaf0] border-2 border-[#e0a526] rounded shadow-[3px_3px_0_#1e1610] font-mono-code text-xs font-bold pointer-events-auto transition-opacity duration-300";
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 320);
+      }, 3000);
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    /* ==========================================================================
+       13. SYNCHRONOUS BOOTSTRAP ON DOM READY (THEN BACKGROUND SYNC)
+       ========================================================================== */
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Load saved state synchronously via safeStorage
+      loadInitialState();
+
+      // 2. Populate Saga/Arc dropdown synchronously
+      populateSagaArcDropdown();
+
+      // 3. Sync form controls
+      const hideToggle = document.getElementById("hide-watched-toggle");
+      const paceInput = document.getElementById("daily-pace-input");
+      const paceSlider = document.getElementById("daily-pace-slider");
+      if (hideToggle) hideToggle.checked = appState.hideWatched;
+      if (paceInput) paceInput.value = String(appState.dailyPace);
+      if (paceSlider) paceSlider.value = String(Math.min(20, appState.dailyPace));
+
+      // 4. Render Telemetry Cards, SVG Voyage Chart Map, Deck, and Episode Logbook immediately
+      renderAll();
+
+      // 5. Launch non-blocking background API sync with 4.5s timeout + 5.5s failsafe watchdog
+      syncLiveData(false);
+    });
+  </script>
+</body>
+</html>
